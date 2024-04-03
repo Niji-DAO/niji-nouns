@@ -117,7 +117,7 @@ contract NounsDescriptorV2Test is Test {
                                 '{"name":"',
                                 'CNNoun 42',
                                 '", "description":"',
-                                'CNNoun 42 is a member of the NijiNouns DAO',
+                                'CNNoun 42 is a member of the CNNouns DAO',
                                 '", "image": "',
                                 'data:image/svg+xml;base64,',
                                 Base64.encode(bytes('mock svg')),
@@ -509,7 +509,7 @@ contract NounsDescriptorV2WithRealArtTest is DeployUtils {
         strings.slice memory imageSlice = imageDecoded.toSlice();
 
         assertEq(json.readString('.name'), 'CNNoun 0');
-        assertEq(json.readString('.description'), 'CNNoun 0 is a member of the NijiNouns DAO');
+        assertEq(json.readString('.description'), 'CNNoun 0 is a member of the CNNouns DAO');
         assertEq(bytes(imageDecoded).length, 17683);
         assertTrue(
             imageSlice.startsWith(
