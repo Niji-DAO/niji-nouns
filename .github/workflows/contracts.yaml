@@ -1,0 +1,41 @@
+name: Contracts CI
+
+on:
+  push:
+    branches:
+      - release
+  pull_request:
+    paths:
+      - 'packages/nouns-contracts/**'
+      - 'packages/nouns-subgraph/**'
+    branches:
+      - '**'
+
+env:
+  NODE_OPTIONS: --max_old_space_size=5120
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile --ignore-optional
+      - run: yarn build
+      - run: yarn test
+        working-directory: packages/nouns-contracts
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - run: forge --version
+        working-directory: packages/nouns-contracts
+      - run: forge build --sizes
+        working-directory: packages/nouns-contracts
+      - run: forge test -vvv --ffi
+        working-directory: packages/nouns-contracts

@@ -1,0 +1,8 @@
+{
+  "name": "NijiNouns",
+  "description": "One CNNoun, every day, forever.\r\n\r\ncryptoninja-nouns.wtf",
+  "image": "https://cryptoninja-nouns.wtf/logo.svg",
+  "external_link": "https://cryptoninja-nouns.wtf",
+  "seller_fee_basis_points": 0,
+  "fee_recipient": "0x0000000000000000000000000000000000000000"
+}
