@@ -8,23 +8,23 @@ One Noun is generated and auctioned every day, forever. All Noun artwork is stor
 
 ## Niji Nouns Contract
 
-┌─────────────────────────────┬──────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────┐
-│           (index)           │                   Address                    │                           Deployment Hash                            │
-├─────────────────────────────┼──────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┤
-│       NFTDescriptorV2       │ '0xa4DE070095cc8fb929d7cAE9E934262dA1b38Ff7' │ '0x1aae43c2a0d44c4a31fbc8399ef0288825edeb79f4d9e3bc5ecd465042950d49' │
-│         SVGRenderer         │ '0xD39ee1EabD3F14Ff834A12d42404305e6336dF0e' │ '0x5910709ec56c5142d61ee91efbc1bedf37720bd79c826e2fc4d9cd3ea97f5649' │
-│      NounsDescriptorV2      │ '0x9464FEddD5BB0252792e2214De94F961e22737a1' │ '0x358b32e9080032e4d2b07cecab2e616a334189ca57397dce6880346e2fdeb1c6' │
-│          Inflator           │ '0xa6b7C913E8db7a95083b81f5203E62531B3dAC75' │ '0x94be0a1ede0dd381eebc14ae7627de0c361c6e2525806ba6f1e165ce73695651' │
-│          NounsArt           │ '0x15eDc3a4B3067a83a17627b881D37AC3546C1Dd3' │ '0x64c4afbb2a36aea9ad3efa93882550ff44921957987735a6896715f8d283130e' │
-│         NounsSeeder         │ '0xE536ed9c4578a5Af8F8E155bB41EE65f3d89BBcb' │ '0x22b5779827438cac858e97f4b6637466ab6e343a5e8cd57e0e91c460392272e2' │
-│         NounsToken          │ '0x58569d9954C834a1ca94996057B1C4f1D867F2cC' │ '0xa5062030d6ec4416882432291479b73c03b6a998e42f33af8334ecd993b63672' │
-│      NounsAuctionHouse      │ '0xdff9D2434Bf9F4fFf1D98a5948e89A21008f00d7' │ '0x0bcfedb5a5259433bc3c4a73516b3696db22210edbddc04ae273a16ee1c2bc8f' │
-│ NounsAuctionHouseProxyAdmin │ '0x977D9adCf5ee86858d08A40059a2cb38B3480a73' │ '0x093beca96e84ef4a29ee1d4896d573fd65db9477d23ab93cf3bbd883d5f2f49c' │
-│   NounsAuctionHouseProxy    │ '0x41e3762D510D66e0EdE91D10961f59ce37b2C42B' │ '0x4ad4a25cf7506aeb96f7339a5761d1b6f855bc49c30f8c1b1874b7adcb1abc35' │
-│      NounsDAOExecutor       │ '0xdCB8Cbd509C470E33aaEa84284f617644665D690' │ '0x03e7585f43402cba6b837464f69794c9c37d3661bf6eec0e5a2fd6f811f3c113' │
-│       NounsDAOLogicV2       │ '0xFF6Cb4138ea9912FeDc3478b6103EaAE4B8Aa6F1' │ '0x4d76e7ade83a6014e6d40290e4e04556c3c172ae7a90c7f8cb58eb018a249f20' │
-│       NounsDAOProxyV2       │ '0x5CbB3beB69055ceC3361f2c2DA759a0920ff59de' │ '0x405b76f1ab35f4fe1113666a0afa997d0cdfc43fb41da0ca146a8eb6d8a9484b' │
-└─────────────────────────────┴──────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────┘
+| Contract                      | Address                                    | TxHash                                                                 |
+|-------------------------------|--------------------------------------------|------------------------------------------------------------------------|
+| NFTDescriptorV2               | 0xa4DE070095cc8fb929d7cAE9E934262dA1b38Ff7 | 0x1aae43c2a0d44c4a31fbc8399ef0288825edeb79f4d9e3bc5ecd465042950d49 |
+| SVGRenderer                   | 0xD39ee1EabD3F14Ff834A12d42404305e6336dF0e | 0x5910709ec56c5142d61ee91efbc1bedf37720bd79c826e2fc4d9cd3ea97f5649 |
+| NounsDescriptorV2             | 0x9464FEddD5BB0252792e2214De94F961e22737a1 | 0x358b32e9080032e4d2b07cecab2e616a334189ca57397dce6880346e2fdeb1c6 |
+| Inflator                      | 0xa6b7C913E8db7a95083b81f5203E62531B3dAC75 | 0x94be0a1ede0dd381eebc14ae7627de0c361c6e2525806ba6f1e165ce73695651 |
+| NounsArt                      | 0x15eDc3a4B3067a83a17627b881D37AC3546C1Dd3 | 0x64c4afbb2a36aea9ad3efa93882550ff44921957987735a6896715f8d283130e |
+| NounsSeeder                   | 0xE536ed9c4578a5Af8F8E155bB41EE65f3d89BBcb | 0x22b5779827438cac858e97f4b6637466ab6e343a5e8cd57e0e91c460392272e2 |
+| NounsToken                    | 0x58569d9954C834a1ca94996057B1C4f1D867F2cC | 0xa5062030d6ec4416882432291479b73c03b6a998e42f33af8334ecd993b63672 |
+| NounsAuctionHouse             | 0xdff9D2434Bf9F4fFf1D98a5948e89A21008f00d7 | 0x0bcfedb5a5259433bc3c4a73516b3696db22210edbddc04ae273a16ee1c2bc8f |
+| NounsAuctionHouseProxyAdmin   | 0x977D9adCf5ee86858d08A40059a2cb38B3480a73 | 0x093beca96e84ef4a29ee1d4896d573fd65db9477d23ab93cf3bbd883d5f2f49c |
+| NounsAuctionHouseProxy        | 0x41e3762D510D66e0EdE91D10961f59ce37b2C42B | 0x4ad4a25cf7506aeb96f7339a5761d1b6f855bc49c30f8c1b1874b7adcb1abc35 |
+| NounsDAOExecutor              | 0xdCB8Cbd509C470E33aaEa84284f617644665D690 | 0x03e7585f43402cba6b837464f69794c9c37d3661bf6eec0e5a2fd6f811f3c113 |
+| NounsDAOLogicV2               | 0xFF6Cb4138ea9912FeDc3478b6103EaAE4B8Aa6F1 | 0x4d76e7ade83a6014e6d40290e4e04556c3c172ae7a90c7f8cb58eb018a249f20 |
+| NounsDAOProxyV2               | 0x5CbB3beB69055ceC3361f2c2DA759a0920ff59de | 0x405b76f1ab35f4fe1113666a0afa997d0cdfc43fb41da0ca146a8eb6d8a9484b |
+
+
 
 ## Contracts
 
