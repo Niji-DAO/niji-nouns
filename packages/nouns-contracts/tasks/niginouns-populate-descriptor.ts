@@ -109,37 +109,37 @@ task('niginouns-populate-descriptor', 'Populates the descriptor with color palet
     await (await descriptorContract.setPalette(0, `0x000000${palette.join('')}`)).wait();
 
     console.log('addSpecials');
-    await (await nounsDescriptor.addSpecialIdentifiers(specialData)).wait();
+    await(await descriptorContract.addSpecialIdentifiers(specialData)).wait();
 
     console.log('addChokers');
-    await(await nounsDescriptor.addChokerIdentifiers(chokerData)).wait();
+    await(await descriptorContract.addChokerIdentifiers(chokerData)).wait();
 
     console.log('addHeadphones');
-    await(await nounsDescriptor.addHeadphoneIdentifiers(headphoneData)).wait();
+    await(await descriptorContract.addHeadphoneIdentifiers(headphoneData)).wait();
 
     console.log('addLeftHands');
-    await(await nounsDescriptor.addLeftHandIdentifiers(leftHandData)).wait();
+    await(await descriptorContract.addLeftHandIdentifiers(leftHandData)).wait();
 
     console.log('addHats');
-    await(await nounsDescriptor.addHatIdentifiers(hatData)).wait();
+    await(await descriptorContract.addHatIdentifiers(hatData)).wait();
 
     console.log('addClothes');
-    await(await nounsDescriptor.addClotheIdentifiers(clotheData)).wait();
+    await(await descriptorContract.addClotheIdentifiers(clotheData)).wait();
 
     console.log('addEars');
-    await(await nounsDescriptor.addEarIdentifiers(earData)).wait();
+    await(await descriptorContract.addEarIdentifiers(earData)).wait();
 
     console.log('addBacks');
-    await(await nounsDescriptor.addBackIdentifiers(backData)).wait();
+    await(await descriptorContract.addBackIdentifiers(backData)).wait();
 
     console.log('addBackDecorations');
-    await(await nounsDescriptor.addBackDecorationIdentifiers(backDecorationData)).wait();
+    await(await descriptorContract.addBackDecorationIdentifiers(backDecorationData)).wait();
 
     console.log('addBackgroundDecorations');
-    await(await nounsDescriptor.addBackgroundDecorationIdentifiers(backDecorationData)).wait();
+    await(await descriptorContract.addBackgroundDecorationIdentifiers(backDecorationData)).wait();
 
     console.log('addHairs');
-    await(await nounsDescriptor.addHairIdentifiers(hairData)).wait();
+    await(await descriptorContract.addHairIdentifiers(hairData)).wait();
 
     console.log('Descriptor populated with palettes and parts.');
   });

@@ -1,12 +1,12 @@
 {
   "network": "unknown",
   "nounsToken": {
-    "address": "0x5A9979C444ce7b331CbdE767e40aA99822CAe6f8"
+    "address": "0x58569d9954C834a1ca94996057B1C4f1D867F2cC"
   },
   "nounsAuctionHouse": {
-    "address": "0xe18F2ff7fD47B8c244F8D8980A8e3687EC196f43"
+    "address": "0x41e3762D510D66e0EdE91D10961f59ce37b2C42B"
   },
   "nounsDAO": {
-    "address": "0x770CBb181d396B3C2B09c477dD39A14E3835D3b7"
+    "address": "0x5CbB3beB69055ceC3361f2c2DA759a0920ff59de"
   }
 }

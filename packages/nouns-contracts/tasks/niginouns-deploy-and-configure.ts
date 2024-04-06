@@ -69,7 +69,7 @@ task('nigi-deploy-and-configure', 'Deploy and configure all contracts')
 
     // Populate the on-chain art
     console.log('Populate descriptor');
-    await run('nigi-populate-descriptor', {
+    await run('niginouns-populate-descriptor', {
       nftDescriptor: contracts.NFTDescriptorV2.address,
       nounsDescriptor: contracts.NounsDescriptorV2.address,
     });

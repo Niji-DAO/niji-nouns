@@ -87,8 +87,6 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       mainnet: process.env.ETHERSCAN_API_KEY!,
-      arbitrumSepolia: 'HFHB23H148GWEGRHDVV366R4FZ3CN2SK15',
-      baseSepolia: '5a112fff-727a-4f16-b4ff-24b4c51f832a',
     },
     customChains: [
       {
@@ -97,6 +95,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: 'https://zkatana.explorer.startale.com/api',
           browserURL: 'https://zkatana.explorer.startale.com',
+        },
+      },
+      {
+        network: 'zKyoto',
+        chainId: 6038361,
+        urls: {
+          apiURL: 'https://astar-zkevm.explorer.startale.com/api',
+          browserURL: 'https://astar-zkevm.explorer.startale.com/',
         },
       },
       {
