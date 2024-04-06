@@ -47,6 +47,7 @@ task('nigi-deploy-and-configure', 'Deploy and configure all contracts')
     types.float,
   )
   .setAction(async (args, { ethers, run }) => {
+    console.log(`nijinouns`)
     const deployAddress = createSigner(ethers.provider).address;
     let balance = await ethers.provider.getBalance(deployAddress);
     console.log(`Deployer address = ${deployAddress}`);

@@ -32,8 +32,10 @@ describe('NounsToken', () => {
     await ethers.provider.send('evm_revert', [snapshotId]);
   });
 
-  it('should allow the minter to mint a noun to itself and a reward noun to the noundersDAO', async () => {
-    const receipt = await (await nounsToken.mint()).wait();
+  it('should allow the minter to mint a noun to itself and a reward noun to the nijiDAO', async () => {
+    const customGasLimit = 1000000; // 適切なガスリミット値に設定する
+    const overrideOptions = { gasLimit: customGasLimit };
+    const receipt = await (await nounsToken.mint(overrideOptions)).wait();
 
     const [, , , noundersNounCreated, , , , ownersNounCreated] = receipt.events || [];
 
@@ -119,14 +121,7 @@ describe('NounsToken', () => {
         'base64',
       ).toString('utf-8');
       expect(json).to.eq(
-        JSON.stringify({
-          name: 'NijiNouns',
-          description: 'One CNNoun, every day, forever.\r\n\r\ncryptoninja-nouns.wtf',
-          image: 'https://cryptoninja-nouns.wtf/logo.svg',
-          external_link: 'https://cryptoninja-nouns.wtf',
-          seller_fee_basis_points: 0,
-          fee_recipient: '0x0000000000000000000000000000000000000000',
-        }),
+        '{"name": "NijiNouns", "description": "One NijiNouns, every day, forever.\\r\\n\\r niji-nouns.wtf", "image": "https://niji-nouns.wtf/logo.svg", "external_link": "https://niji-nouns.wtf", "seller_fee_basis_points": 0, "fee_recipient": "0x0000000000000000000000000000000000000000"}',
       );
     });
     it('should allow owner to set contractURI', async () => {

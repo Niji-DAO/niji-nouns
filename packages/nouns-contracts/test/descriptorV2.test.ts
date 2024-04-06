@@ -2,9 +2,10 @@ import chai from 'chai';
 import { solidity } from 'ethereum-waffle';
 import { appendFileSync } from 'fs';
 import { ethers } from 'hardhat';
-import ImageData from '../files/image-data-32.json';
+// import ImageData from '../files/image-data-32.json';
 // import ImageData from '../files/image-data-48.json';
 // import ImageData from '../files/image-data-64.json';
+import ImageData from '../files/image-s3.json';
 import { NounsDescriptorV2 } from '../typechain';
 import { LongestPart } from './types';
 import { deployNounsDescriptorV2, populateDescriptorV2 } from './utils';
@@ -69,7 +70,6 @@ describe('NounsDescriptorV2', () => {
     const { bgcolors, images } = ImageData;
     console.log('import ImageData ok!');
     console.log(`bgcolors: ${bgcolors}`);
-    console.log(`bgcolors: ${typeof bgcolors}`);
     console.log(`bgcolors: ${bgcolors.length}`);
     const {
       backgroundDecorations,
@@ -112,22 +112,25 @@ describe('NounsDescriptorV2', () => {
       console.log(`backDecoration: ${Math.min(i, backDecorations.length - 1)}`);
       console.log(`backgroundDecoration: ${Math.min(i, backgroundDecorations.length - 1)}`);
       console.log(`hair: ${Math.min(i, hairs.length - 1)}`);
+
+      const seeds = {
+        background: Math.floor(Math.random() * bgcolors.length),
+        backgroundDecoration: Math.floor(Math.random() * backgroundDecorations.length),
+        special: Math.floor(Math.random() * specials.length),
+        leftHand: Math.floor(Math.random() * leftHands.length),
+        back: Math.floor(Math.random() * backs.length),
+        ear: Math.floor(Math.random() * ears.length),
+        choker: Math.floor(Math.random() * chokers.length),
+        clothe: Math.floor(Math.random() * clothes.length),
+        hair: Math.floor(Math.random() * hats.length),
+        headphone: Math.floor(Math.random() * headphones.length),
+        hat: Math.floor(Math.random() * hats.length),
+        backDecoration: Math.floor(Math.random() * backDecorations.length),
+      };
+      console.log(`seeds: ${JSON.stringify(seeds)}`);
       const tokenUri = await nounsDescriptor.tokenURI(
         i,
-        {
-          background: Math.min(i, bgcolors.length - 1),
-          backgroundDecoration: Math.min(i, backgroundDecorations.length - 1),
-          back: Math.min(i, backs.length - 1),
-          special: Math.min(i, specials.length - 1),
-          clothe: Math.min(i, clothes.length - 1),
-          backDecoration: Math.min(i, backDecorations.length - 1),
-          choker: Math.min(i, chokers.length - 1),
-          headphone: Math.min(i, headphones.length - 1),
-          ear: Math.min(i, ears.length - 1),
-          hair: Math.min(i, hairs.length - 1),
-          hat: Math.min(i, hats.length - 1),
-          leftHand: Math.min(i, leftHands.length - 1),
-        },
+        seeds,
         { gasLimit: 200_000_000_000 },
       );
       console.log(`${i} tokenUri ok!`);
@@ -136,8 +139,9 @@ describe('NounsDescriptorV2', () => {
           'ascii',
         ),
       );
-      expect(name).to.equal(`CNNoun ${i}`);
-      expect(description).to.equal(`CNNoun ${i} is a member of the NijiNouns DAO`);
+      console.log(`image: ${image}`);
+      expect(name).to.equal(`NijiNoun ${i}`);
+      expect(description).to.equal(`NijiNoun ${i} is a member of the Niji DAO`);
       expect(image).to.not.be.undefined;
 
       appendFileSync(

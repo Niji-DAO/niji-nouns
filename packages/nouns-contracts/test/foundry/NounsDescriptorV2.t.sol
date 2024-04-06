@@ -94,7 +94,7 @@ contract NounsDescriptorV2Test is Test {
     }
 
     function testToggleDataURIWorks() public {
-        descriptor.setBaseURI('https://cryptoninja-nouns.wtf/');
+        descriptor.setBaseURI('https://niji-nouns.wtf/');
         _makeArtGettersNotRevert();
         vm.mockCall(
             address(renderer),
@@ -103,7 +103,7 @@ contract NounsDescriptorV2Test is Test {
         );
 
         descriptor.toggleDataURIEnabled();
-        assertEq(descriptor.tokenURI(42, INounsSeeder.Seed(0, 0, 0, 0, 0)), 'https://cryptoninja-nouns.wtf/42');
+        assertEq(descriptor.tokenURI(42, INounsSeeder.Seed(0, 0, 0, 0, 0)), 'https://niji-nouns.wtf/42');
 
         descriptor.toggleDataURIEnabled();
         assertEq(
@@ -115,9 +115,9 @@ contract NounsDescriptorV2Test is Test {
                         bytes(
                             abi.encodePacked(
                                 '{"name":"',
-                                'CNNoun 42',
+                                'NijiNouns 42',
                                 '", "description":"',
-                                'CNNoun 42 is a member of the CNNouns DAO',
+                                'NijiNouns 42 is a member of the Niji DAO',
                                 '", "image": "',
                                 'data:image/svg+xml;base64,',
                                 Base64.encode(bytes('mock svg')),
@@ -433,11 +433,7 @@ contract NounsDescriptorV2Test is Test {
     }
 
     function testSkillsUsesArt() public {
-        vm.mockCall(
-            address(art),
-            abi.encodeWithSelector(INounsArt.skills.selector, 17),
-            abi.encode('return value')
-        );
+        vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.skills.selector, 17), abi.encode('return value'));
         assertEq(descriptor.skills(17), 'return value');
         vm.clearMockedCalls();
     }
@@ -508,8 +504,8 @@ contract NounsDescriptorV2WithRealArtTest is DeployUtils {
         string memory imageDecoded = string(removeDataTypePrefix(json.readString('.image')).decode());
         strings.slice memory imageSlice = imageDecoded.toSlice();
 
-        assertEq(json.readString('.name'), 'CNNoun 0');
-        assertEq(json.readString('.description'), 'CNNoun 0 is a member of the CNNouns DAO');
+        assertEq(json.readString('.name'), 'NijiNouns 0');
+        assertEq(json.readString('.description'), 'NijiNouns 0 is a member of the Niji DAO');
         assertEq(bytes(imageDecoded).length, 17683);
         assertTrue(
             imageSlice.startsWith(

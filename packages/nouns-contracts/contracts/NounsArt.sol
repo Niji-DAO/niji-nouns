@@ -41,6 +41,12 @@ contract NounsArt is INounsArt {
     /// @notice Noun Color Palettes (Index => Hex Colors, stored as a contract using SSTORE2)
     mapping(uint8 => address) public palettesPointers;
 
+    /// @notice Noun Image Parts (category => number => Identifier)
+    mapping(string => mapping(uint256 => string)) public imageParts;
+
+    /// @notice Noun Image Parts Count (category => Count)
+    mapping(string => uint256) public imagesCount;
+
     /// @notice Nigi Specials Trait
     Trait public specialsTrait;
 
@@ -121,6 +127,10 @@ contract NounsArt is INounsArt {
         return specialsTrait;
     }
 
+    function getSpecialsCount() external view override returns (uint256) {
+        return imagesCount["specials"];
+    }
+
     /**
      * @notice Get the Trait struct for chokers.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -129,6 +139,10 @@ contract NounsArt is INounsArt {
      */
     function getChokersTrait() external view override returns (Trait memory) {
         return chokersTrait;
+    }
+
+    function getChokersCount() external view override returns (uint256) {
+        return imagesCount["chokers"];
     }
 
     /**
@@ -141,6 +155,10 @@ contract NounsArt is INounsArt {
         return headphonesTrait;
     }
 
+    function getHeadphonesCount() external view override returns (uint256) {
+        return imagesCount["headphones"];
+    }
+
     /**
      * @notice Get the Trait struct for left hands.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -149,6 +167,10 @@ contract NounsArt is INounsArt {
      */
     function getLeftHandsTrait() external view override returns (Trait memory) {
         return leftHandsTrait;
+    }
+
+    function getLeftHandsCount() external view override returns (uint256) {
+        return imagesCount["leftHands"];
     }
 
     /**
@@ -161,6 +183,10 @@ contract NounsArt is INounsArt {
         return hatsTrait;
     }
 
+    function getHatsCount() external view override returns (uint256) {
+        return imagesCount["hats"];
+    }
+
     /**
      * @notice Get the Trait struct for clothes.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -169,6 +195,10 @@ contract NounsArt is INounsArt {
      */
     function getClothesTrait() external view override returns (Trait memory) {
         return clothesTrait;
+    }
+
+    function getClothesCount() external view override returns (uint256) {
+        return imagesCount["clothes"];
     }
 
     /**
@@ -181,6 +211,10 @@ contract NounsArt is INounsArt {
         return earsTrait;
     }
 
+    function getEarsCount() external view override returns (uint256) {
+        return imagesCount["ears"];
+    }
+
     /**
      * @notice Get the Trait struct for backs.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -189,6 +223,10 @@ contract NounsArt is INounsArt {
      */
     function getBacksTrait() external view override returns (Trait memory) {
         return backsTrait;
+    }
+
+    function getBacksCount() external view override returns (uint256) {
+        return imagesCount["backs"];
     }
 
     /**
@@ -201,6 +239,10 @@ contract NounsArt is INounsArt {
         return backDecorationsTrait;
     }
 
+    function getBackDecorationsCount() external view override returns (uint256) {
+        return imagesCount["backDecorations"];
+    }
+
     /**
      * @notice Get the Trait struct for backgroundDecorations.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -211,6 +253,10 @@ contract NounsArt is INounsArt {
         return backgroundDecorationsTrait;
     }
 
+    function getBackgroundDecorationsCount() external view override returns (uint256) {
+        return imagesCount["backgroundDecorations"];
+    }
+
     /**
      * @notice Get the Trait struct for hairs.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
@@ -219,6 +265,14 @@ contract NounsArt is INounsArt {
      */
     function getHairsTrait() external view override returns (Trait memory) {
         return hairsTrait;
+    }
+
+    function getHairsCount() external view override returns (uint256) {
+        return imagesCount["hairs"];
+    }
+
+    function getImagePart(string memory category, uint256 number) external override view returns (string memory) {
+        return imageParts[category][number];
     }
 
     /**
@@ -280,6 +334,12 @@ contract NounsArt is INounsArt {
         emit SpecialsAdded(imageCount);
     }
 
+    function addSpecials(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "specials");
+
+        emit SpecialsAdded(uint16(identifiers.length));
+    }
+
     /**
      * @notice Add a batch of chokers images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -296,6 +356,12 @@ contract NounsArt is INounsArt {
         addPage(chokersTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit ChokersAdded(imageCount);
+    }
+
+    function addChokers(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "chokers");
+
+        emit ChokersAdded(uint16(identifiers.length));
     }
 
     /**
@@ -316,6 +382,12 @@ contract NounsArt is INounsArt {
         emit HeadphonesAdded(imageCount);
     }
 
+    function addHeadphones(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "headphones");
+
+        emit HeadphonesAdded(uint16(identifiers.length));
+    }
+
     /**
      * @notice Add a batch of leftHands images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -332,6 +404,12 @@ contract NounsArt is INounsArt {
         addPage(leftHandsTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit LeftHandsAdded(imageCount);
+    }
+
+    function addLeftHands(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "leftHands");
+
+        emit LeftHandsAdded(uint16(identifiers.length));
     }
 
     /**
@@ -352,6 +430,12 @@ contract NounsArt is INounsArt {
         emit HatsAdded(imageCount);
     }
 
+    function addHats(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "hats");
+
+        emit HatsAdded(uint16(identifiers.length));
+    }
+
     /**
      * @notice Add a batch of clothes images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -368,6 +452,12 @@ contract NounsArt is INounsArt {
         addPage(clothesTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit ClothesAdded(imageCount);
+    }
+
+    function addClothes(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "clothes");
+
+        emit ClothesAdded(uint16(identifiers.length));
     }
 
     /**
@@ -388,6 +478,12 @@ contract NounsArt is INounsArt {
         emit EarsAdded(imageCount);
     }
 
+    function addEars(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "ears");
+
+        emit EarsAdded(uint16(identifiers.length));
+    }
+
     /**
      * @notice Add a batch of backs images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -406,6 +502,13 @@ contract NounsArt is INounsArt {
         emit BacksAdded(imageCount);
     }
 
+    function addBacks(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "backs");
+
+        emit BacksAdded(uint16(identifiers.length));
+    }
+
+
     /**
      * @notice Add a batch of backDecorations images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -422,6 +525,12 @@ contract NounsArt is INounsArt {
         addPage(backDecorationsTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit BackDecorationsAdded(imageCount);
+    }
+
+    function addBackDecorations(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "backDecorations");
+
+        emit BackDecorationsAdded(uint16(identifiers.length));
     }
 
     /**
@@ -442,6 +551,12 @@ contract NounsArt is INounsArt {
         emit BackgroundDecorationsAdded(imageCount);
     }
 
+    function addBackgroundDecorations(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "backgroundDecorations");
+
+        emit BackgroundDecorationsAdded(uint16(identifiers.length));
+    }
+
     /**
      * @notice Add a batch of hairs images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -458,6 +573,12 @@ contract NounsArt is INounsArt {
         addPage(hairsTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit HairsAdded(imageCount);
+    }
+
+    function addHairs(string[] calldata identifiers) external override onlyDescriptor {
+        addPages(identifiers, "hairs");
+
+        emit HairsAdded(uint16(identifiers.length));
     }
 
     /**
@@ -807,6 +928,17 @@ contract NounsArt is INounsArt {
             NounArtStoragePage({ pointer: pointer, decompressedLength: decompressedLength, imageCount: imageCount })
         );
         trait.storedImagesCount += imageCount;
+    }
+
+    function addPages(string[] calldata identifiers, string memory category) internal {
+        if (identifiers.length == 0) {
+            revert BadImageCount();
+        }
+        uint256 currentImagesCount = imagesCount[category];
+        for (uint256 i = 0; i < identifiers.length; i++) {
+            imageParts[category][currentImagesCount + i] = identifiers[i];
+        }
+        imagesCount[category] += identifiers.length;
     }
 
     function imageByIndex(INounsArt.Trait storage trait, uint256 index) internal view returns (bytes memory) {

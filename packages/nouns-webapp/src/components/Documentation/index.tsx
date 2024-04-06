@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/macro';
 import { Col } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import proposalFlow from '../../assets/nijinouns-proposal-flow.jpg';
+import proposalFlow from '../../assets/cnnouns-proposal-flow.jpg';
 import { NoTrans } from '../../i18n/NoTrans';
 import Section from '../../layout/Section';
 import Link from '../Link';

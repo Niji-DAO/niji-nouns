@@ -30,16 +30,16 @@ interface INounsSeeder {
     struct Seed {
         uint256 background;
         uint256 backgroundDecoration;
-        uint256 back;
         uint256 special;
-        uint256 clothe;
-        uint256 backDecoration;
-        uint256 choker;
+        uint256 leftHand;
+        uint256 back;
         uint256 ear;
+        uint256 choker;
+        uint256 clothe;
         uint256 hair;
         uint256 headphone;
         uint256 hat;
-        uint256 leftHand;
+        uint256 backDecoration;
     }
 
     function generateSeed(uint256 nounId, INounsDescriptorMinimal descriptor) external view returns (Seed memory);

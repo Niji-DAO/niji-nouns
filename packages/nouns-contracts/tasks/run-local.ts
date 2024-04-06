@@ -14,28 +14,37 @@ task(
 
   const contracts = await run('deploy-local');
 
+  console.log('start populate-descriptor');
   await run('populate-descriptor', {
     nftDescriptor: contracts.NFTDescriptorV2.instance.address,
     nounsDescriptor: contracts.NounsDescriptorV2.instance.address,
   });
 
+  console.log('start NounsAuctionHouse unpause');
   await contracts.NounsAuctionHouse.instance
     .attach(contracts.NounsAuctionHouseProxy.instance.address)
     .unpause({
       gasLimit: 1_000_000,
     });
 
+  console.log("start transfer ownership")
+
   // Transfer ownership
   const executorAddress = contracts.NounsDAOExecutor.instance.address;
+  console.log(`executorAddress: ${executorAddress}`);
   await contracts.NounsDescriptorV2.instance.transferOwnership(executorAddress);
+  console.log(`ok NounsDescriptorV2`);
   await contracts.NounsToken.instance.transferOwnership(executorAddress);
+  console.log(`ok NounsToken`);
   await contracts.NounsAuctionHouseProxyAdmin.instance.transferOwnership(executorAddress);
+  console.log(`ok NounsAuctionHouseProxyAdmin`);
   await contracts.NounsAuctionHouse.instance
     .attach(contracts.NounsAuctionHouseProxy.instance.address)
     .transferOwnership(executorAddress);
   console.log(
     'Transferred ownership of the descriptor, token, and proxy admin contracts to the executor.',
   );
+  console.log(`ok NounsAuctionHouse`);
 
   // await run('create-proposal', {
   //   nounsDaoProxy: contracts.NounsDAOProxyV2.instance.address,

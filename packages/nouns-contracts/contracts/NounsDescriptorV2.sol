@@ -117,77 +117,88 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      * @notice Get the number of available Noun `specials`.
      */
     function specialCount() external view override returns (uint256) {
-        return art.getSpecialsTrait().storedImagesCount;
+        // return art.getSpecialsTrait().storedImagesCount;
+        return art.getSpecialsCount();
     }
 
     /**
      * @notice Get the number of available Noun `chokers`.
      */
     function chokerCount() external view override returns (uint256) {
-        return art.getChokersTrait().storedImagesCount;
+        // return art.getChokersTrait().storedImagesCount;
+        return art.getChokersCount();
     }
 
     /**
      * @notice Get the number of available Noun `headphones`.
      */
     function headphoneCount() external view override returns (uint256) {
-        return art.getHeadphonesTrait().storedImagesCount;
+        // return art.getHeadphonesTrait().storedImagesCount;
+        return art.getHeadphonesCount();
     }
 
     /**
      * @notice Get the number of available Noun `leftHands`.
      */
     function leftHandCount() external view override returns (uint256) {
-        return art.getLeftHandsTrait().storedImagesCount;
+        // return art.getLeftHandsTrait().storedImagesCount;
+        return art.getLeftHandsCount();
     }
 
     /**
      * @notice Get the number of available Noun `hats`.
      */
     function hatCount() external view override returns (uint256) {
-        return art.getHatsTrait().storedImagesCount;
+        // return art.getHatsTrait().storedImagesCount;
+        return art.getHatsCount();
     }
 
     /**
      * @notice Get the number of available Noun `clothes`.
      */
     function clotheCount() external view override returns (uint256) {
-        return art.getClothesTrait().storedImagesCount;
+        // return art.getClothesTrait().storedImagesCount;
+        return art.getClothesCount();
     }
 
     /**
      * @notice Get the number of available Noun `ears`.
      */
     function earCount() external view override returns (uint256) {
-        return art.getEarsTrait().storedImagesCount;
+        // return art.getEarsTrait().storedImagesCount;
+        return art.getEarsCount();
     }
 
     /**
      * @notice Get the number of available Noun `backs`.
      */
     function backCount() external view override returns (uint256) {
-        return art.getBacksTrait().storedImagesCount;
+        // return art.getBacksTrait().storedImagesCount;
+        return art.getBacksCount();
     }
 
     /**
      * @notice Get the number of available Noun `backDecorations`.
      */
     function backDecorationCount() external view override returns (uint256) {
-        return art.getBackDecorationsTrait().storedImagesCount;
+        // return art.getBackDecorationsTrait().storedImagesCount;
+        return art.getBackDecorationsCount();
     }
 
     /**
      * @notice Get the number of available Noun `backgroundDecorations`.
      */
     function backgroundDecorationCount() external view override returns (uint256) {
-        return art.getBackgroundDecorationsTrait().storedImagesCount;
+        // return art.getBackgroundDecorationsTrait().storedImagesCount;
+        return art.getBackgroundDecorationsCount();
     }
 
     /**
      * @notice Get the number of available Noun `hairs`.
      */
     function hairCount() external view override returns (uint256) {
-        return art.getHairsTrait().storedImagesCount;
+        // return art.getHairsTrait().storedImagesCount;
+        return art.getHairsCount();
     }
 
 
@@ -234,6 +245,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addSpecials(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addSpecialIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addSpecials(identifiers);
+    }
+
     /**
      * @notice Add a batch of choker images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -248,6 +263,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addChokers(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    function addChokerIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addChokers(identifiers);
     }
 
     /**
@@ -266,6 +285,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addHeadphones(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addHeadphoneIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addHeadphones(identifiers);
+    }
+
     /**
      * @notice Add a batch of leftHand images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -280,6 +303,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addLeftHands(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    function addLeftHandIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addLeftHands(identifiers);
     }
 
     /**
@@ -298,6 +325,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addHats(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addHatIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addHats(identifiers);
+    }
+
     /**
      * @notice Add a batch of clothe images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -312,6 +343,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addClothes(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    function addClotheIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addClothes(identifiers);
     }
 
     /**
@@ -330,6 +365,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addEars(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addEarIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addEars(identifiers);
+    }
+
     /**
      * @notice Add a batch of back images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -344,6 +383,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addBacks(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    function addBackIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addBacks(identifiers);
     }
 
     /**
@@ -362,6 +405,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addBackDecorations(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addBackDecorationIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addBackDecorations(identifiers);
+    }
+
     /**
      * @notice Add a batch of backgroundDecoration images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -378,6 +425,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         art.addBackgroundDecorations(encodedCompressed, decompressedLength, imageCount);
     }
 
+    function addBackgroundDecorationIdentifiers(string[] calldata identifiers) external override onlyOwner whenPartsNotLocked {
+        art.addBackgroundDecorations(identifiers);
+    }
+
     /**
      * @notice Add a batch of hair images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
@@ -392,6 +443,10 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addHairs(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    function addHairIdentifiers(string[] calldata identifiers) external onlyOwner whenPartsNotLocked {
+        art.addHairs(identifiers);
     }
 
     /**
@@ -762,8 +817,8 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      */
     function dataURI(uint256 tokenId, INounsSeeder.Seed memory seed) public view override returns (string memory) {
         string memory nounId = tokenId.toString();
-        string memory name = string(abi.encodePacked('CNNoun ', nounId));
-        string memory description = string(abi.encodePacked('CNNoun ', nounId, ' is a member of the NijiNouns DAO'));
+        string memory name = string(abi.encodePacked('NijiNoun ', nounId));
+        string memory description = string(abi.encodePacked('NijiNoun ', nounId, ' is a member of the Niji DAO'));
 
         return genericDataURI(name, description, seed);
     }
@@ -802,48 +857,60 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     function getPartsForSeed(INounsSeeder.Seed memory seed) public view returns (ISVGRenderer.Part[] memory) {
         ISVGRenderer.Part[] memory parts = new ISVGRenderer.Part[](11);
         {
-            bytes memory backgroundDecoration = art.backgroundDecorations(seed.backgroundDecoration);
-            parts[0] = ISVGRenderer.Part({ image: backgroundDecoration, palette: _getPalette(backgroundDecoration) });
+            // bytes memory backgroundDecoration = art.backgroundDecorations(seed.backgroundDecoration);
+            // parts[0] = ISVGRenderer.Part({ image: backgroundDecoration, palette: _getPalette(backgroundDecoration) });
+            parts[0] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backgroundDecorations', seed.backgroundDecoration)), palette: "" });
         }
         {
-            bytes memory back = art.backs(seed.back);
-            parts[1] = ISVGRenderer.Part({ image: back, palette: _getPalette(back) });
+            // bytes memory special = art.specials(seed.special);
+            // parts[1] = ISVGRenderer.Part({ image: special, palette: _getPalette(special) });
+            parts[1] = ISVGRenderer.Part({ image: bytes(art.getImagePart('specials', seed.special)), palette: "" });
         }
         {
-            bytes memory special = art.specials(seed.special);
-            parts[2] = ISVGRenderer.Part({ image: special, palette: _getPalette(special) });
+            // bytes memory leftHand = art.leftHands(seed.leftHand);
+            // parts[2] = ISVGRenderer.Part({ image: leftHand, palette: _getPalette(leftHand) });
+            parts[2] = ISVGRenderer.Part({ image: bytes(art.getImagePart('leftHands', seed.leftHand)), palette: "" });
         }
         {
-            bytes memory clothe = art.clothes(seed.clothe);
-            parts[3] = ISVGRenderer.Part({ image: clothe, palette: _getPalette(clothe) });
+            // bytes memory back = art.backs(seed.back);
+            // parts[3] = ISVGRenderer.Part({ image: back, palette: _getPalette(back) });
+            parts[3] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backs', seed.back)), palette: "" });
         }
         {
-            bytes memory backDecoration = art.backDecorations(seed.backDecoration);
-            parts[4] = ISVGRenderer.Part({ image: backDecoration, palette: _getPalette(backDecoration) });
+            // bytes memory ear = art.ears(seed.ear);
+            // parts[4] = ISVGRenderer.Part({ image: ear, palette: _getPalette(ear) });
+            parts[4] = ISVGRenderer.Part({ image: bytes(art.getImagePart('ears', seed.ear)), palette: "" });
         }
         {
-            bytes memory choker = art.chokers(seed.choker);
-            parts[5] = ISVGRenderer.Part({ image: choker, palette: _getPalette(choker) });
+            // bytes memory choker = art.chokers(seed.choker);
+            // parts[5] = ISVGRenderer.Part({ image: choker, palette: _getPalette(choker) });
+            parts[5] = ISVGRenderer.Part({ image: bytes(art.getImagePart('chokers', seed.choker)), palette: "" });
         }
         {
-            bytes memory ear = art.ears(seed.ear);
-            parts[6] = ISVGRenderer.Part({ image: ear, palette: _getPalette(ear) });
+            // bytes memory clothe = art.clothes(seed.clothe);
+            // parts[6] = ISVGRenderer.Part({ image: clothe, palette: _getPalette(clothe) });
+            parts[6] = ISVGRenderer.Part({ image: bytes(art.getImagePart('clothes', seed.clothe)), palette: "" });
         }
         {
-            bytes memory hair = art.hairs(seed.hair);
-            parts[7] = ISVGRenderer.Part({ image: hair, palette: _getPalette(hair) });
+            // bytes memory hair = art.hairs(seed.hair);
+            // parts[7] = ISVGRenderer.Part({ image: hair, palette: _getPalette(hair) });
+            parts[7] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hairs', seed.hair)), palette: "" });
         }
         {
-            bytes memory headphone = art.headphones(seed.headphone);
-            parts[8] = ISVGRenderer.Part({ image: headphone, palette: _getPalette(headphone) });
+            // bytes memory headphone = art.headphones(seed.headphone);
+            // parts[8] = ISVGRenderer.Part({ image: headphone, palette: _getPalette(headphone) });
+            parts[8] = ISVGRenderer.Part({ image: bytes(art.getImagePart('headphones', seed.headphone)), palette: "" });
         }
         {
-            bytes memory hat = art.hats(seed.hat);
-            parts[9] = ISVGRenderer.Part({ image: hat, palette: _getPalette(hat) });
+            // bytes memory hat = art.hats(seed.hat);
+            // parts[9] = ISVGRenderer.Part({ image: hat, palette: _getPalette(hat) });
+            parts[9] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hats', seed.hat)), palette: "" });
         }
+
         {
-            bytes memory leftHand = art.leftHands(seed.leftHand);
-            parts[10] = ISVGRenderer.Part({ image: leftHand, palette: _getPalette(leftHand) });
+            // bytes memory backDecoration = art.backDecorations(seed.backDecoration);
+            // parts[10] = ISVGRenderer.Part({ image: backDecoration, palette: _getPalette(backDecoration) });
+            parts[10] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backDecorations', seed.backDecoration)), palette: "" });
         }
         return parts;
     }

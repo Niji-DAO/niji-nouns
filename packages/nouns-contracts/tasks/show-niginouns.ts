@@ -5,19 +5,19 @@ task('show-nigi', 'Show a Noun')
   .addOptionalParam(
     'nounsToken',
     'The `NounsToken` contract address',
-    '0x300E1259d2F39C2bF341AA4fF536f4FC361627ff',
+    '0x5A9979C444ce7b331CbdE767e40aA99822CAe6f8',
     types.string,
   )
   .addOptionalParam(
     'nftDescriptor',
     'The `NFTDescriptorV2` contract address',
-    '0x4c26bfD3F0ccaDD67Bd664F78E3Ddf41fb548E88',
+    '0x496C7Afd80b5a78F8320bcD310dc889a281EBb35',
     types.string,
   )
   .addOptionalParam(
     'nounsDescriptor',
     'The `NounsDescriptorV2` contract address',
-    '0x8C71886543302E55464C79b5b7FCd92B84e03ad1',
+    '0x05D52a46Be83b0A8D2ef6a7697458E443Ae5346e',
     types.string,
   )
   .addOptionalParam('tokenId', '`NounsToken` id', 0, types.int)
@@ -49,7 +49,7 @@ task('show-nigi', 'Show a Noun')
     const art = await descriptorContract.art();
     console.log('art', art);
 
-    const extra = { gasLimit: 2_000_000_000 };
+    const extra = { gasLimit: 2_000_000_000_000 };
     // const background = await descriptorContract.backgrounds(seeds.background);
     // console.log('background', background);
     // const special = await descriptorContract.specials(seeds.special, extra);

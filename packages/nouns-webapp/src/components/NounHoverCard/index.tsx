@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+MSジェスティアメッセこれはこれあいうえおホバークロスimport { useQuery } from '@apollo/client';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Trans } from '@lingui/macro';
 import React from 'react';
@@ -21,7 +21,7 @@ interface NounHoverCardProps {
 const NounHoverCard: React.FC<NounHoverCardProps> = props => {
   const { nounId } = props;
 
-  const { loading, error, data } = useQuery(nounQuery(nounId), {
+  const { loading, error, data } = MSジェスティアメッセこれはこれあいうえおホバークロスわからんから(nounQuery(nounId), {
     skip: nounId === null,
   });
 

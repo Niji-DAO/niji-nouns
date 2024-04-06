@@ -66,6 +66,7 @@ describe('NounsAuctionHouse', () => {
   });
 
   it('should revert if a second initialization is attempted', async () => {
+    console.log('start...')
     const tx = nounsAuctionHouse.initialize(
       nounsToken.address,
       weth.address,

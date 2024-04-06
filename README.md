@@ -30,7 +30,7 @@ In order to make retrieving more complex data from the auction history, [nouns s
 
 ### nouns-webapp
 
-The [nouns webapp](packages/nouns-webapp) is the frontend for interacting with Noun auctions as hosted at [cryptoninja-nouns.wtf](https://cryptoninja-nouns.wtf).
+The [nouns webapp](packages/nouns-webapp) is the frontend for interacting with Noun auctions as hosted at [niji-nouns.wtf](https://niji-nouns.wtf).
 
 ## Quickstart
 

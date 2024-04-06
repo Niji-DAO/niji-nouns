@@ -7,7 +7,7 @@
     "Nounders",
     "NijiNouns"
   ],
-  "homepage": "https://cryptoninja-nouns.wtf",
+  "homepage": "https://niji-nouns.wtf",
   "license": "GPL-3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,6 +1,6 @@
 # @nouns/webapp
 
-This package contains the source for the NijiNouns webapp at [cryptoninja-nouns.wtf](https://cryptoninja-nouns.wtf).
+This package contains the source for the NijiNouns webapp at [niji-nouns.wtf](https://niji-nouns.wtf).
 
 ## Quickstart
 

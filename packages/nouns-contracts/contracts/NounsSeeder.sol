@@ -57,23 +57,23 @@ contract NounsSeeder is INounsSeeder {
             backgroundDecoration: uint48(
                 uint48(pseudorandomness >> 48) % backgroundDecorationCount
             ),
-            back: uint48(
-                uint48(pseudorandomness >> 96) % backCount
-            ),
             special: uint48(
-                uint48(pseudorandomness >> 144) % specialCount
+                uint48(pseudorandomness >> 96) % specialCount
             ),
-            clothe: uint48(
-                uint48(pseudorandomness >> 192) % clotheCount
+            leftHand: uint48(
+                uint48(pseudorandomness >> 144) % leftHandCount
             ),
-            backDecoration: uint48(
-                uint48(pseudorandomness >> 240) % backDecorationCount
+            back: uint48(
+                uint48(pseudorandomness >> 192) % backCount
+            ),
+            ear: uint48(
+                uint48(pseudorandomness >> 240) % earCount
             ),
             choker: uint48(
                 uint48(pseudorandomness >> 288) % chokerCount
             ),
-            ear: uint48(
-                uint48(pseudorandomness >> 336) % earCount
+            clothe: uint48(
+                uint48(pseudorandomness >> 336) % clotheCount
             ),
             hair: uint48(
                 uint48(pseudorandomness >> 384) % hairCount
@@ -84,8 +84,8 @@ contract NounsSeeder is INounsSeeder {
             hat: uint48(
                 uint48(pseudorandomness >> 480) % hatCount
             ),
-            leftHand: uint48(
-                uint48(pseudorandomness >> 528) % leftHandCount
+            backDecoration: uint48(
+                uint48(pseudorandomness >> 528) % backDecorationCount
             )
         });
     }

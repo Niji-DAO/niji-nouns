@@ -112,11 +112,15 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
+    function addSpecialIdentifiers(string[] calldata identifiers) external;
+
     function addChokers(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addChokerIdentifiers(string[] calldata identifiers) external;
 
     function addHeadphones(
         bytes calldata encodedCompressed,
@@ -124,11 +128,15 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
+    function addHeadphoneIdentifiers(string[] calldata identifiers) external;
+
     function addLeftHands(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addLeftHandIdentifiers(string[] calldata identifiers) external;
 
     function addHats(
         bytes calldata encodedCompressed,
@@ -136,11 +144,15 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
+    function addHatIdentifiers(string[] calldata identifiers) external;
+
     function addClothes(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addClotheIdentifiers(string[] calldata identifiers) external;
 
     function addEars(
         bytes calldata encodedCompressed,
@@ -148,11 +160,15 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
+    function addEarIdentifiers(string[] calldata identifiers) external;
+
     function addBacks(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addBackIdentifiers(string[] calldata identifiers) external;
 
     function addBackDecorations(
         bytes calldata encodedCompressed,
@@ -160,17 +176,23 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
+    function addBackDecorationIdentifiers(string[] calldata identifiers) external;
+
     function addBackgroundDecorations(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
 
+    function addBackgroundDecorationIdentifiers(string[] calldata identifiers) external;
+
     function addHairs(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addHairIdentifiers(string[] calldata identifiers) external;
 
     function setPalettePointer(uint8 paletteIndex, address pointer) external;
 

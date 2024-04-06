@@ -30,9 +30,10 @@ import {
 import { Block } from '@ethersproject/abstract-provider';
 import { BigNumber } from 'ethers';
 import { deflateRawSync } from 'zlib';
-import ImageData from '../files/image-data-32.json';
+// import ImageData from '../files/image-data-32.json';
 // import ImageData from '../files/image-data-48.json';
 // import ImageData from '../files/image-data-64.json';
+import ImageData from '../files/image-s3.json';
 import { MAX_QUORUM_VOTES_BPS, MIN_QUORUM_VOTES_BPS } from './constants';
 import { DynamicQuorumParams } from './types';
 
@@ -134,16 +135,16 @@ export const populateDescriptor = async (nounsDescriptor: NounsDescriptor): Prom
   const { bgcolors, palette, images } = ImageData;
   const {
     backgroundDecorations,
-    backs,
     specials,
-    clothes,
-    backDecorations,
-    chokers,
+    leftHands,
+    backs,
     ears,
+    chokers,
+    clothes,
     hairs,
     headphones,
     hats,
-    leftHands,
+    backDecorations,
   } = images;
 
   // Split up head and skill population due to high gas usage
@@ -151,16 +152,16 @@ export const populateDescriptor = async (nounsDescriptor: NounsDescriptor): Prom
     nounsDescriptor.addManyBackgrounds(bgcolors),
     nounsDescriptor.addManyColorsToPalette(0, palette),
     nounsDescriptor.addManyBackgroundDecorations(backgroundDecorations.map(({ data }) => data)),
-    nounsDescriptor.addManyBacks(backs.map(({ data }) => data)),
     nounsDescriptor.addManySpecials(specials.map(({ data }) => data)),
-    nounsDescriptor.addManyClothes(clothes.map(({ data }) => data)),
-    nounsDescriptor.addManyBackDecorations(backDecorations.map(({ data }) => data)),
-    nounsDescriptor.addManyChokers(chokers.map(({ data }) => data)),
+    nounsDescriptor.addManyLeftHands(leftHands.map(({ data }) => data)),
+    nounsDescriptor.addManyBacks(backs.map(({ data }) => data)),
     nounsDescriptor.addManyEars(ears.map(({ data }) => data)),
+    nounsDescriptor.addManyChokers(chokers.map(({ data }) => data)),
+    nounsDescriptor.addManyClothes(clothes.map(({ data }) => data)),
     nounsDescriptor.addManyHairs(hairs.map(({ data }) => data)),
     nounsDescriptor.addManyHeadphones(headphones.map(({ data }) => data)),
     nounsDescriptor.addManyHats(hats.map(({ data }) => data)),
-    nounsDescriptor.addManyLeftHands(leftHands.map(({ data }) => data)),
+    nounsDescriptor.addManyBackDecorations(backDecorations.map(({ data }) => data)),
   ]);
 };
 
@@ -168,127 +169,97 @@ export const populateDescriptorV2 = async (nounsDescriptor: NounsDescriptorV2): 
   const { bgcolors, palette, images } = ImageData;
   const {
     backgroundDecorations,
-    backs,
     specials,
-    clothes,
-    backDecorations,
-    chokers,
+    leftHands,
+    backs,
     ears,
+    chokers,
+    clothes,
     hairs,
     headphones,
     hats,
-    leftHands,
+    backDecorations,
   } = images;
 
-  const {
-    encodedCompressed: specialsCompressed,
-    originalLength: specialsLength,
-    itemCount: specialsCount,
-  } = dataToDescriptorInput(specials.map(({ data }) => data));
+  const backgroundDecorationData: string[] = backgroundDecorations.map(
+    backgroundDecoration => backgroundDecoration.data,
+  );
 
-  console.log(`populateDescriptorV2 specials OK!`);
+  console.log(`🚀 backgroundDecorationData: ${backgroundDecorationData}`);
 
-  const {
-    encodedCompressed: chokersCompressed,
-    originalLength: chokersLength,
-    itemCount: chokersCount,
-  } = dataToDescriptorInput(chokers.map(({ data }) => data));
+  const specialData: string[] = specials.map(
+    special => special.data,
+  );
 
-  console.log(`populateDescriptorV2 chokers OK!`);
+  console.log(`🚀 specialData: ${specialData}`);
 
-  const {
-    encodedCompressed: headphonesCompressed,
-    originalLength: headphonesLength,
-    itemCount: headphonesCount,
-  } = dataToDescriptorInput(headphones.map(({ data }) => data));
+  const leftHandData: string[] = leftHands.map(
+    leftHand  => leftHand.data,
+  );
 
-  console.log(`populateDescriptorV2 headphones OK!`);
+  console.log(`🚀 leftHandData: ${leftHandData}`);
 
-  const {
-    encodedCompressed: leftHandsCompressed,
-    originalLength: leftHandsLength,
-    itemCount: leftHandsCount,
-  } = dataToDescriptorInput(leftHands.map(({ data }) => data));
+  const backData: string[] = backs.map(
+    back => back.data,
+    );
 
-  console.log(`populateDescriptorV2 leftHands OK!`);
+  console.log(`🚀 backData: ${backData}`);
 
-  const {
-    encodedCompressed: hatsCompressed,
-    originalLength: hatsLength,
-    itemCount: hatsCount,
-  } = dataToDescriptorInput(hats.map(({ data }) => data));
+  const earData: string[] = ears.map(
+    ear  => ear.data,
+  );
 
-  console.log(`populateDescriptorV2 hats OK!`);
+  console.log(`🚀 earData: ${earData}`);
 
-  const {
-    encodedCompressed: clothesCompressed,
-    originalLength: clothesLength,
-    itemCount: clothesCount,
-  } = dataToDescriptorInput(clothes.map(({ data }) => data));
+const chokerData: string[] = chokers.map(
+    choker => choker.data,
+  );
 
-  console.log(`populateDescriptorV2 clothes OK!`);
+  console.log(`🚀 chokerData: ${chokerData}`);
 
-  const {
-    encodedCompressed: earsCompressed,
-    originalLength: earsLength,
-    itemCount: earsCount,
-  } = dataToDescriptorInput(ears.map(({ data }) => data));
+const clotheData: string[] = clothes.map(
+    clothe => clothe.data,
+  );
 
-  console.log(`populateDescriptorV2 ears OK!`);
+  console.log(`🚀 clotheData: ${clotheData}`);
 
-  const {
-    encodedCompressed: backsCompressed,
-    originalLength: backsLength,
-    itemCount: backsCount,
-  } = dataToDescriptorInput(backs.map(({ data }) => data));
+const hairData: string[] = hairs.map(
+    hair => hair.data,
+  );
 
-  console.log(`populateDescriptorV2 backs OK!`);
+  console.log(`🚀 hairData: ${hairData}`);
 
-  const {
-    encodedCompressed: backDecorationsCompressed,
-    originalLength: backDecorationsLength,
-    itemCount: backDecorationsCount,
-  } = dataToDescriptorInput(backDecorations.map(({ data }) => data));
+const headphoneData: string[] = headphones.map(
+    headphone => headphone.data,
+  );
 
-  console.log(`populateDescriptorV2 backDecorations OK!`);
+  console.log(`🚀 headphoneData: ${headphoneData}`);
 
-  const {
-    encodedCompressed: backgroundDecorationsCompressed,
-    originalLength: backgroundDecorationsLength,
-    itemCount: backgroundDecorationsCount,
-  } = dataToDescriptorInput(backgroundDecorations.map(({ data }: any) => data));
+const hatData: string[] = hats.map(
+    hat => hat.data,
+  );
 
-  console.log(`populateDescriptorV2 backgroundDecorations OK!`);
+  console.log(`🚀 hatData: ${hatData}`);
 
-  const {
-    encodedCompressed: hairsCompressed,
-    originalLength: hairsLength,
-    itemCount: hairsCount,
-  } = dataToDescriptorInput(hairs.map(({ data }) => data));
+const backDecorationData: string[] = backDecorations.map(
+    backDecoration => backDecoration.data,
+  );
 
-  console.log(`populateDescriptorV2 hairs OK!`);
+  console.log(`🚀 backDecorationData: ${backDecorationData}`);
 
   await nounsDescriptor.addManyBackgrounds(bgcolors);
   await nounsDescriptor.setPalette(0, `0x000000${palette.join('')}`);
-  await nounsDescriptor.addSpecials(specialsCompressed, specialsLength, specialsCount);
-  await nounsDescriptor.addChokers(chokersCompressed, chokersLength, chokersCount);
-  await nounsDescriptor.addHeadphones(headphonesCompressed, headphonesLength, headphonesCount);
-  await nounsDescriptor.addLeftHands(leftHandsCompressed, leftHandsLength, leftHandsCount);
-  await nounsDescriptor.addHats(hatsCompressed, hatsLength, hatsCount);
-  await nounsDescriptor.addClothes(clothesCompressed, clothesLength, clothesCount);
-  await nounsDescriptor.addEars(earsCompressed, earsLength, earsCount);
-  await nounsDescriptor.addBacks(backsCompressed, backsLength, backsCount);
-  await nounsDescriptor.addBackDecorations(
-    backDecorationsCompressed,
-    backDecorationsLength,
-    backDecorationsCount,
-  );
-  await nounsDescriptor.addBackgroundDecorations(
-    backgroundDecorationsCompressed,
-    backgroundDecorationsLength,
-    backgroundDecorationsCount,
-  );
-  await nounsDescriptor.addHairs(hairsCompressed, hairsLength, hairsCount);
+  await nounsDescriptor.addBackgroundDecorationIdentifiers(backgroundDecorationData);
+  await nounsDescriptor.addSpecialIdentifiers(specialData);
+  await nounsDescriptor.addLeftHandIdentifiers(leftHandData);
+  await nounsDescriptor.addBackIdentifiers(backData);
+  await nounsDescriptor.addEarIdentifiers(earData);
+  await nounsDescriptor.addChokerIdentifiers(chokerData);
+  await nounsDescriptor.addClotheIdentifiers(clotheData);
+  await nounsDescriptor.addHairIdentifiers(hairData);
+  await nounsDescriptor.addHeadphoneIdentifiers(headphoneData);
+  await nounsDescriptor.addHatIdentifiers(hatData);
+  await nounsDescriptor.addBackDecorationIdentifiers(backDecorationData);
 };
 
 export const deployGovAndToken = async (
@@ -621,17 +592,51 @@ export const propose = async (
   return await gov.latestProposalIds(proposer.address);
 };
 
+// function dataToDescriptorInput(data: string[]): {
+//   encodedCompressed: string;
+//   originalLength: number;
+//   itemCount: number;
+// } {
+//   console.log('start dataToDescriptorInput');
+//   console.log(`data: ${data}`)
+//   const abiEncoded = ethers.utils.defaultAbiCoder.encode(['bytes[]'], [data]);
+//   console.log(`abiEncoded: ${abiEncoded}`);
+//   const encodedCompressed = `0x${deflateRawSync(
+//     Buffer.from(abiEncoded.substring(2), 'hex'),
+//   ).toString('hex')}`;
+
+//   console.log(`encodedCompressed: ${encodedCompressed}`);
+
+//   const originalLength = abiEncoded.substring(2).length / 2;
+//   console.log(`originalLength: ${originalLength}`);
+//   const itemCount = data.length;
+
+//   return {
+//     encodedCompressed,
+//     originalLength,
+//     itemCount,
+//   };
+// }
+
 function dataToDescriptorInput(data: string[]): {
   encodedCompressed: string;
   originalLength: number;
   itemCount: number;
 } {
-  const abiEncoded = ethers.utils.defaultAbiCoder.encode(['bytes[]'], [data]);
+  console.log('start dataToDescriptorInput');
+  console.log(`data: ${data}`)
+  const dataAsBytes32 = data.map(item => ethers.utils.formatBytes32String(item));
+  console.log(`dataAsBytes32: ${dataAsBytes32}`);
+  const abiEncoded = ethers.utils.defaultAbiCoder.encode(['bytes32[]'], [dataAsBytes32]);
+  console.log(`abiEncoded: ${abiEncoded}`);
   const encodedCompressed = `0x${deflateRawSync(
     Buffer.from(abiEncoded.substring(2), 'hex'),
   ).toString('hex')}`;
 
+  console.log(`encodedCompressed: ${encodedCompressed}`);
+
   const originalLength = abiEncoded.substring(2).length / 2;
+  console.log(`originalLength: ${originalLength}`);
   const itemCount = data.length;
 
   return {

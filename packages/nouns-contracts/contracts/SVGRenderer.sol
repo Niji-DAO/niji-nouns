@@ -52,12 +52,30 @@ contract SVGRenderer is ISVGRenderer {
     function generateSVG(SVGParams calldata params) external pure override returns (string memory svg) {
         if (bytes(params.background).length != 0) {
             // prettier-ignore
+            // return string(
+            //     abi.encodePacked(
+            //         _SVG_START_TAG,
+            //         '<rect width="100%" height="100%" fill="#', params.background, '" />',
+            //         _generateSVGRects(params),
+            //         _SVG_END_TAG
+            //     )
+            // );
             return string(
                 abi.encodePacked(
-                    _SVG_START_TAG,
-                    '<rect width="100%" height="100%" fill="#', params.background, '" />',
-                    _generateSVGRects(params),
-                    _SVG_END_TAG
+                    "https://",
+                    params.background,
+                    params.parts[0].image
+                    // params.parts[1].image,
+                    // params.parts[2].image,
+                    // params.parts[3].image,
+                    // params.parts[4].image,
+                    // params.parts[5].image,
+                    // params.parts[6].image,
+                    // params.parts[7].image,
+                    // params.parts[8].image,
+                    // params.parts[9].image,
+                    // params.parts[10].image,
+                    // params.parts[11].image
                 )
             );
         }

@@ -39,7 +39,7 @@ type TransferEvent @entity {
 }
 
 type Seed @entity {
-  "The CNNoun's ERC721 token id"
+  "The NijiNoun's ERC721 token id"
   id: ID!
 
   "The background index"
@@ -59,7 +59,7 @@ type Seed @entity {
 }
 
 type Noun @entity {
-  "The CNNoun's ERC721 token id"
+  "The NijiNoun's ERC721 token id"
   id: ID!
 
   "The seed used to determine the Noun's traits"
@@ -99,7 +99,7 @@ type Bid @entity {
 }
 
 type Auction @entity {
-  "The CNNoun's ERC721 token id"
+  "The NijiNoun's ERC721 token id"
   id: ID!
 
   "The Noun"

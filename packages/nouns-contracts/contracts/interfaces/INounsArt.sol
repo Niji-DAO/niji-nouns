@@ -85,6 +85,8 @@ interface INounsArt {
         uint256 storedImagesCount;
     }
 
+    function getImagePart(string memory category, uint256 number) external view returns (string memory);
+
     function descriptor() external view returns (address);
 
     function inflator() external view returns (IInflator);
@@ -107,11 +109,15 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addSpecials(string[] calldata identifiers) external;
+
     function addChokers(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addChokers(string[] calldata identifiers) external;
 
     function addHeadphones(
         bytes calldata encodedCompressed,
@@ -119,11 +125,15 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addHeadphones(string[] calldata identifiers) external;
+
     function addLeftHands(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addLeftHands(string[] calldata identifiers) external;
 
     function addHats(
         bytes calldata encodedCompressed,
@@ -131,11 +141,15 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addHats(string[] calldata identifiers) external;
+
     function addClothes(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addClothes(string[] calldata identifiers) external;
 
     function addEars(
         bytes calldata encodedCompressed,
@@ -143,11 +157,15 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addEars(string[] calldata identifiers) external;
+
     function addBacks(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addBacks(string[] calldata identifiers) external;
 
     function addBackDecorations(
         bytes calldata encodedCompressed,
@@ -155,17 +173,23 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
+    function addBackDecorations(string[] calldata identifiers) external;
+
     function addBackgroundDecorations(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
 
+    function addBackgroundDecorations(string[] calldata identifiers) external;
+
     function addHairs(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
+
+    function addHairs(string[] calldata identifiers) external;
 
     function addSpecialsFromPointer(
         address pointer,
@@ -261,25 +285,49 @@ interface INounsArt {
 
     function hairs(uint256 index) external view returns (bytes memory);
 
+    function getBackgroundDecorationsTrait() external view returns (Trait memory);
+
     function getSpecialsTrait() external view returns (Trait memory);
-
-    function getChokersTrait() external view returns (Trait memory);
-
-    function getHeadphonesTrait() external view returns (Trait memory);
 
     function getLeftHandsTrait() external view returns (Trait memory);
 
-    function getHatsTrait() external view returns (Trait memory);
-
-    function getClothesTrait() external view returns (Trait memory);
+    function getBacksTrait() external view returns (Trait memory);
 
     function getEarsTrait() external view returns (Trait memory);
 
-    function getBacksTrait() external view returns (Trait memory);
+    function getChokersTrait() external view returns (Trait memory);
+
+    function getClothesTrait() external view returns (Trait memory);
+
+    function getHairsTrait() external view returns (Trait memory);
+
+    function getHeadphonesTrait() external view returns (Trait memory);
+
+    function getHatsTrait() external view returns (Trait memory);
 
     function getBackDecorationsTrait() external view returns (Trait memory);
 
-    function getBackgroundDecorationsTrait() external view returns (Trait memory);
+    function getBackgroundDecorationsCount() external view returns (uint256);
 
-    function getHairsTrait() external view returns (Trait memory);
+    function getSpecialsCount() external view returns (uint256);
+
+    function getLeftHandsCount() external view returns (uint256);
+
+    function getBacksCount() external view returns (uint256);
+
+    function getEarsCount() external view returns (uint256);
+
+    function getChokersCount() external view returns (uint256);
+
+    function getClothesCount() external view returns (uint256);
+
+    function getHairsCount() external view returns (uint256);
+
+    function getHeadphonesCount() external view returns (uint256);
+
+    function getHatsCount() external view returns (uint256);
+
+    function getBackDecorationsCount() external view returns (uint256);
+
+
 }

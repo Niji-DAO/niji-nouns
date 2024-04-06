@@ -293,7 +293,9 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      * @notice Batch add Noun backgroundDecorations.
      * @dev This function can only be called by the owner when not locked.
      */
-    function addManyBackgroundDecorations(bytes[] calldata _backgroundDecorations) external override onlyOwner whenPartsNotLocked {
+    function addManyBackgroundDecorations(
+        bytes[] calldata _backgroundDecorations
+    ) external override onlyOwner whenPartsNotLocked {
         for (uint256 i = 0; i < _backgroundDecorations.length; i++) {
             _addBackgroundDecoration(_backgroundDecorations[i]);
         }
@@ -402,7 +404,9 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      * @notice Add a Noun backgroundDecoration.
      * @dev This function can only be called by the owner when not locked.
      */
-    function addBackgroundDecoration(bytes calldata _backgroundDecoration) external override onlyOwner whenPartsNotLocked {
+    function addBackgroundDecoration(
+        bytes calldata _backgroundDecoration
+    ) external override onlyOwner whenPartsNotLocked {
         _addBackgroundDecoration(_backgroundDecoration);
     }
 
@@ -464,8 +468,8 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      */
     function dataURI(uint256 tokenId, INounsSeeder.Seed memory seed) public view override returns (string memory) {
         string memory nounId = tokenId.toString();
-        string memory name = string(abi.encodePacked('CNNoun ', nounId));
-        string memory description = string(abi.encodePacked('CNNoun ', nounId, ' is a member of the NijiNouns DAO'));
+        string memory name = string(abi.encodePacked('NijiNoun ', nounId));
+        string memory description = string(abi.encodePacked('NijiNoun ', nounId, ' is a member of the NijiNouns DAO'));
 
         return genericDataURI(name, description, seed);
     }

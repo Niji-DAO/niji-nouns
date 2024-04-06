@@ -1,8 +1,10 @@
 import { task, types } from 'hardhat/config';
 // import ImageData from '../files/image-data-v2.json';
 // import ImageData from '../files/image-data-64.json';
-import ImageData from '../files/image-data-64.json';
+// import ImageData from '../files/image-data-64.json';
+import ImageData from '../files/image-s3.json';
 import { dataToDescriptorInput } from './utils';
+import { NounsDescriptorV2, NounsDescriptorV2__factory } from '../typechain';
 
 task('populate-descriptor', 'Populates the descriptor with color palettes and Noun parts')
   .addOptionalParam(
@@ -21,144 +23,118 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     // const options = { gasLimit: network.name === 'hardhat' ? 30000000 : undefined };
     const options = { gasLimit: network.name === 'hardhat' ? undefined : undefined };
 
-    const descriptorFactory = await ethers.getContractFactory('NounsDescriptorV2', {
-      libraries: {
-        NFTDescriptorV2: nftDescriptor,
+    const descriptorFactory: NounsDescriptorV2__factory = await ethers.getContractFactory(
+      'NounsDescriptorV2',
+      {
+        libraries: {
+          NFTDescriptorV2: nftDescriptor,
+        },
       },
-    });
-    const descriptorContract = descriptorFactory.attach(nounsDescriptor);
+    );
+    const descriptorContract: NounsDescriptorV2 = descriptorFactory.attach(nounsDescriptor);
 
     const { bgcolors, palette, images } = ImageData;
     const {
       backgroundDecorations,
-      backs,
       specials,
-      clothes,
-      backDecorations,
-      chokers,
+      leftHands,
+      backs,
       ears,
+      chokers,
+      clothes,
       hairs,
       headphones,
       hats,
-      leftHands,
+      backDecorations,
     } = images;
 
-    const specialsPage = dataToDescriptorInput(specials.map(({ data }) => data));
-    console.log('ok specials');
+    console.log(`bgcolors: ${bgcolors}`);
+    console.log(`palette: ${palette}`);
+    console.log(`images: ${JSON.stringify(images)}`);
 
-    const chokersPage = dataToDescriptorInput(chokers.map(({ data }) => data));
-    console.log('ok chokers');
-
-    const headphonesPage = dataToDescriptorInput(headphones.map(({ data }) => data));
-    console.log('ok headphones');
-
-    const leftHandsPage = dataToDescriptorInput(leftHands.map(({ data }) => data));
-    console.log('ok leftHands');
-
-    const hatsPage = dataToDescriptorInput(hats.map(({ data }) => data));
-    console.log('ok hats');
-
-    const clothesPage = dataToDescriptorInput(clothes.map(({ data }) => data));
-    console.log('ok clothes');
-
-    const earsPage = dataToDescriptorInput(ears.map(({ data }) => data));
-    console.log('ok ears');
-
-    const backsPage = dataToDescriptorInput(backs.map(({ data }) => data));
-    console.log('ok backs');
-
-    const backDecorationsPage = dataToDescriptorInput(
-      backDecorations.map(({ data }) => data),
+    const backgroundDecorationData: string[] = backgroundDecorations.map(
+      backgroundDecoration => backgroundDecoration.data,
     );
-    console.log('ok backDecorations');
 
-    const backgroundDecorationsPage = dataToDescriptorInput(
-      backgroundDecorations.map(({ data }) => data),
-    );
-    console.log('ok backgroundDecorations');
+    console.log(`🚀 backgroundDecorationData: ${backgroundDecorationData}`);
 
-    const hairsPage = dataToDescriptorInput(hairs.map(({ data }) => data));
-    console.log('ok hairs');
+    const specialData: string[] = specials.map(special => special.data);
+
+    console.log(`🚀 specialData: ${specialData}`);
+
+    const leftHandData: string[] = leftHands.map(leftHand => leftHand.data);
+
+    console.log(`🚀 leftHandData: ${leftHandData}`);
+
+    const backData: string[] = backs.map(back => back.data);
+
+    console.log(`🚀 backData: ${backData}`);
+
+    const earData: string[] = ears.map(ear => ear.data);
+
+    console.log(`🚀 earData: ${earData}`);
+
+    const chokerData: string[] = chokers.map(choker => choker.data);
+
+    console.log(`🚀 chokerData: ${chokerData}`);
+
+    const clotheData: string[] = clothes.map(clothe => clothe.data);
+
+    console.log(`🚀 clotheData: ${clotheData}`);
+
+    const hairData: string[] = hairs.map(hair => hair.data);
+
+    console.log(`🚀 hairData: ${hairData}`);
+
+    const headphoneData: string[] = headphones.map(headphone => headphone.data);
+
+    console.log(`🚀 headphoneData: ${headphoneData}`);
+
+    const hatData: string[] = hats.map(hat => hat.data);
+
+    console.log(`🚀 hatData: ${hatData}`);
+
+    const backDecorationData: string[] = backDecorations.map(backDecoration => backDecoration.data);
+
+    console.log(`🚀 backDecorationData: ${backDecorationData}`);
+
+    console.log('populate descriptor v2');
 
     await descriptorContract.addManyBackgrounds(bgcolors);
     await descriptorContract.setPalette(0, `0x000000${palette.join('')}`);
 
-    await descriptorContract.addSpecials(
-      specialsPage.encodedCompressed,
-      specialsPage.originalLength,
-      specialsPage.itemCount,
-      options,
-    );
+    console.log('addSpecials');
+    await descriptorContract.addSpecialIdentifiers(specialData, options);
 
-    await descriptorContract.addChokers(
-      chokersPage.encodedCompressed,
-      chokersPage.originalLength,
-      chokersPage.itemCount,
-      options,
-    );
+    console.log('addChokers');
+    await descriptorContract.addChokerIdentifiers(chokerData, options);
 
-    await descriptorContract.addHeadphones(
-      headphonesPage.encodedCompressed,
-      headphonesPage.originalLength,
-      headphonesPage.itemCount,
-      options,
-    );
+    console.log('addHeadphones');
+    await descriptorContract.addHeadphoneIdentifiers(headphoneData, options);
 
-    await descriptorContract.addLeftHands(
-      leftHandsPage.encodedCompressed,
-      leftHandsPage.originalLength,
-      leftHandsPage.itemCount,
-      options,
-    );
+    console.log('addLeftHands');
+    await descriptorContract.addLeftHandIdentifiers(leftHandData, options);
 
-    await descriptorContract.addHats(
-      hatsPage.encodedCompressed,
-      hatsPage.originalLength,
-      hatsPage.itemCount,
-      options,
-    );
+    console.log('addHats');
+    await descriptorContract.addHatIdentifiers(hatData, options);
 
-    await descriptorContract.addClothes(
-      clothesPage.encodedCompressed,
-      clothesPage.originalLength,
-      clothesPage.itemCount,
-      options,
-    );
+    console.log('addClothes');
+    await descriptorContract.addClotheIdentifiers(clotheData, options);
 
-    await descriptorContract.addEars(
-      earsPage.encodedCompressed,
-      earsPage.originalLength,
-      earsPage.itemCount,
-      options,
-    );
+    console.log('addEars');
+    await descriptorContract.addEarIdentifiers(earData, options);
 
-    await descriptorContract.addBacks(
-      backsPage.encodedCompressed,
-      backsPage.originalLength,
-      backsPage.itemCount,
-      options,
-    );
+    console.log('addBacks');
+    await descriptorContract.addBackIdentifiers(backData, options);
 
-    await descriptorContract.addBackDecorations(
-      backDecorationsPage.encodedCompressed,
-      backDecorationsPage.originalLength,
-      backDecorationsPage.itemCount,
-      options,
-    );
+    console.log('addBackDecorations');
+    await descriptorContract.addBackDecorationIdentifiers(backDecorationData, options);
 
-    await descriptorContract.addBackgroundDecorations(
-      backgroundDecorationsPage.encodedCompressed,
-      backgroundDecorationsPage.originalLength,
-      backgroundDecorationsPage.itemCount,
-      options,
-    );
+    console.log('addBackgroundDecorations');
+    await descriptorContract.addBackgroundDecorationIdentifiers(backDecorationData, options);
 
-    await descriptorContract.addHairs(
-      hairsPage.encodedCompressed,
-      hairsPage.originalLength,
-      hairsPage.itemCount,
-      options,
-    );
+    console.log('addHairs');
+    await descriptorContract.addHairIdentifiers(hairData, options);
 
     console.log('Descriptor populated with palettes and parts.');
   });

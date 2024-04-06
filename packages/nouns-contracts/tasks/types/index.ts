@@ -7,12 +7,8 @@ export enum ChainId {
   Goerli = 5,
   Kovan = 42,
   Sepolia = 11155111,
-  ZKatana = 1261120,
+  AstarZkEVM = 3776,
   ZKyoto = 6038361,
-  ArbitrumSepolia = 421614,
-  OptimismSepolia = 11155420,
-  BaseSepolia = 84532,
-  PolygonZkevmTestnet = 1442,
 }
 
 // prettier-ignore
