@@ -1,0 +1,8 @@
+{
+  "name": "NijiNouns",
+  "description": "One NijiNouns, every day, forever.\r\n\r\n niji-nouns.wtf",
+  "image": "https://niji-nouns.wtf/logo.svg",
+  "external_link": "https://niji-nouns.wtf",
+  "seller_fee_basis_points": 0,
+  "fee_recipient": "0x0000000000000000000000000000000000000000"
+}
