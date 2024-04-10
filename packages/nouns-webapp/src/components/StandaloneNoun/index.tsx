@@ -28,8 +28,13 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
   const id = nounId.toString();
   const name = `CNNoun ${id}`;
   const description = `CNNoun ${id} is a member of the NijiNouns DAO`;
+  console.log(`getNoun seed: ${seed}`);
   const { parts, background } = getNounData(seed);
-  const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
+  console.log(`parts: ${parts}`);
+  console.log(`seed: ${seed}`);
+  const image = `https://res.cloudinary.com/dplp5wtzk/image/upload/v1712191176/niji/img/${parts.join(
+    '',
+  )}.png`;
 
   return {
     name,
@@ -41,6 +46,7 @@ export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 export const StandaloneNounImage: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
   const seed = useNounSeed(nounId);
+  console.log(`StandaloneNounImage seed: ${seed}`);
   const noun = seed && getNoun(nounId, seed);
 
   return <Image src={noun ? noun.image : ''} fluid />;
@@ -49,6 +55,7 @@ export const StandaloneNounImage: React.FC<StandaloneNounProps> = (props: Standa
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
   const seed = useNounSeed(nounId);
+  console.log(`StandaloneNoun seed: ${seed}`);
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -73,6 +80,7 @@ export const StandaloneNounCircular: React.FC<StandaloneCircularNounProps> = (
 ) => {
   const { nounId, border } = props;
   const seed = useNounSeed(nounId);
+  console.log(`StandaloneNounCircular seed: ${seed}`);
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -103,6 +111,7 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
 ) => {
   const { nounId } = props;
   const seed = useNounSeed(nounId);
+  console.log(`StandaloneNounRoundedCorners seed: ${seed}`);
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -132,6 +141,8 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
+  console.log(`StandaloneNounWithSeed nounId: ${nounId}`);
+  console.log(`StandaloneNounWithSeed seed: ${seed}`);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
   if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="CNNoun" />;

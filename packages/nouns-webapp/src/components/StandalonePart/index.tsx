@@ -18,7 +18,7 @@ export const getBackground = (partIndex: number) => {
 
 export const getPart = (partType: string, partIndex: number) => {
   const data = getPartData(partType, partIndex);
-  const image = `data:image/svg+xml;base64,${btoa(buildSVG([{ data }], imageData.palette))}`;
+  const image = `https://res.cloudinary.com/dplp5wtzk/image/upload/v1712191176/niji/img/${partType}/${partIndex}.png`;
 
   return { image };
 };

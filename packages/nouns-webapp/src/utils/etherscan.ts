@@ -1,7 +1,7 @@
 import { ChainId } from '@usedapp/core';
 import { CHAIN_ID, ETHERSCAN_API_KEY } from '../config';
 
-const getBaseURL = (network: ChainId) => {
+const getBaseURL = (network: any) => {
   switch (network) {
     case ChainId.Rinkeby:
       return 'https://rinkeby.etherscan.io/';
@@ -34,7 +34,7 @@ export const buildEtherscanHoldingsLink = (address: string): string => {
   return new URL(path, BASE_URL).toString();
 };
 
-const getApiBaseURL = (network: ChainId) => {
+const getApiBaseURL = (network: any) => {
   switch (network) {
     case ChainId.Rinkeby:
       return `https://api-rinkeby.etherscan.io/`;

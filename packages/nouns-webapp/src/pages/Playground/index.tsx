@@ -51,7 +51,10 @@ const Playground: React.FC = () => {
       for (let i = 0; i < amount; i++) {
         const seed = { ...getRandomNounSeed(), ...modSeed };
         const { parts, background } = getNounData(seed);
-        const svg = buildSVG(parts, encoder.data.palette, background);
+        // const svg = buildSVG(parts, encoder.data.palette, background);
+        const svg =
+          `https://res.cloudinary.com/dplp5wtzk/image/upload/v1712191176/niji/img/${background}.png`
+        ;
         setNounSvgs(prev => {
           return prev ? [svg, ...prev] : [svg];
         });

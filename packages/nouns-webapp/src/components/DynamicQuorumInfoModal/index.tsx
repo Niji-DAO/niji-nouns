@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/client';
+import { XIcon } from '@heroicons/react/solid';
+import { Trans } from '@lingui/macro';
+import clsx from 'clsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import config from '../../config';
+import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 import { Proposal, useDynamicQuorumProps } from '../../wrappers/nounsDao';
 import { totalNounSupplyAtPropSnapshot } from '../../wrappers/subgraph';
 import { Backdrop } from '../Modal';
 import classes from './DynamicQuorumInfoModal.module.css';
-import { XIcon } from '@heroicons/react/solid';
-import { Trans } from '@lingui/macro';
-import clsx from 'clsx';
-import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 
 const PLOTTING_CONSTANTS = {
   width: 950,
@@ -89,8 +89,8 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
               <Trans>
                 The Threshold (minimum number of For votes required to pass a proposal) is set as a
                 function of the number of Against votes a proposal has recieved. It increases
-                linearly as a function of the % of CN Nouns voting against a prop, varying between Min
-                Threshold and Max Threshold.
+                linearly as a function of the % of CN Nouns voting against a prop, varying between
+                Min Threshold and Max Threshold.
               </Trans>
             ) : (
               <Trans>
@@ -203,7 +203,7 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                       <text x="20" y="280">
                         Min Threshold: {Math.floor((minQuorumBps * totalNounSupply) / 10_000)}{' '}
                         {Math.floor((minQuorumBps * totalNounSupply) / 10_000) === 1
-                          ? 'CN Noun'
+                          ? 'Niji Noun'
                           : 'CN Nouns'}{' '}
                         <tspan fill="var(--brand-gray-light-text)">
                           ({minQuorumBps / 100}% of Nouns)
@@ -233,8 +233,8 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                     >
                       {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
-                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
-                        Against)
+                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'Niji Noun' : 'CN Nouns'}{' '}
+                        Currently Against)
                       </tspan>
                     </text>
                   ) : (
@@ -244,8 +244,8 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                     >
                       {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
-                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
-                        Against)
+                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'Niji Noun' : 'CN Nouns'}{' '}
+                        Currently Against)
                       </tspan>
                     </text>
                   )}

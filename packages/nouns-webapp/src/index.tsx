@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ChainId, DAppProvider } from '@usedapp/core';
+import { DAppProvider } from '@usedapp/core';
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import account from './state/slices/account';
@@ -27,7 +27,7 @@ import { clientFactory, latestAuctionsQuery } from './wrappers/subgraph';
 import { useEffect } from 'react';
 import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
-import config, { CHAIN_ID, createNetworkHttpUrl, multicallOnLocalhost } from './config';
+import config, { ChainId, CHAIN_ID, createNetworkHttpUrl, multicallOnLocalhost } from './config';
 import { WebSocketProvider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish } from 'ethers';
 import { NounsAuctionHouseFactory } from '@nouns/sdk';
@@ -84,6 +84,7 @@ const supportedChainURLs = {
   [ChainId.Rinkeby]: createNetworkHttpUrl('rinkeby'),
   [ChainId.Hardhat]: 'http://localhost:8545',
   [ChainId.Goerli]: createNetworkHttpUrl('goerli'),
+  [ChainId.ZKyoto]: createNetworkHttpUrl('zkyoto'),
 };
 
 // prettier-ignore
@@ -157,7 +158,24 @@ const ChainSubscriber: React.FC = () => {
     };
 
     // Fetch the current auction
-    const currentAuction = await nounsAuctionHouseContract.auction();
+    // const currentAuction = await nounsAuctionHouseContract.auction();
+    const currentAuction: {
+      nounId: BigNumber;
+      amount: BigNumber;
+      startTime: BigNumber;
+      endTime: BigNumber;
+      bidder: string;
+      settled: boolean;
+    } = {
+      nounId: BigNumber.from(1),
+      amount: BigNumber.from("1000000000000000000"),
+      startTime: BigNumber.from(1625097600),
+      endTime: BigNumber.from(1625184000),
+      bidder: "0x4B0897b0513fdc7C541B6d9D7E929C4e5364D2dB",
+      settled: false,
+    };
+
+console.log(currentAuction);
     dispatch(setFullAuction(reduxSafeAuction(currentAuction)));
     dispatch(setLastAuctionNounId(currentAuction.nounId.toNumber()));
 

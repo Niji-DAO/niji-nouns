@@ -28,12 +28,12 @@ msgstr "404: お探しの人、場所、物は見つかりませんでした。"
 
 #: src/components/profileEvent/event/DesktopNounWinEvent/index.tsx
 #: src/components/profileEvent/event/MobileNounWinEvent/index.tsx
-msgid "<0> CN Noun {0} </0> sent to <1><2/></1>"
+msgid "<0> Niji Noun {0} </0> sent to <1><2/></1>"
 msgstr ""
 
 #: src/components/profileEvent/event/DesktopNounWinEvent/index.tsx
 #: src/components/profileEvent/event/MobileNounWinEvent/index.tsx
-msgid "<0> CN Noun {0} </0> won by <1><2/></1>"
+msgid "<0> Niji Noun {0} </0> won by <1><2/></1>"
 msgstr ""
 
 #: src/components/ProposalHeader/index.tsx
@@ -189,12 +189,12 @@ msgid "Born"
 msgstr "誕生"
 
 #: src/components/CurrentDelegatePannel/index.tsx
-msgid "CN Noun votes are not transferable, but are <0>delegatable</0>, which means you can assign your vote to someone else as long as you own your CN Noun."
+msgid "Niji Noun votes are not transferable, but are <0>delegatable</0>, which means you can assign your vote to someone else as long as you own your Niji Noun."
 msgstr "CN Nounの票は譲渡できませんが (CN Nounの売却にはそれに応じて票も移ります)、委任することができます。"
 
 #: src/components/AuctionActivityNounTitle/index.tsx
-msgid "CN Noun {0}"
-msgstr "CN Noun {0}"
+msgid "Niji Noun {0}"
+msgstr "Niji Noun {0}"
 
 #: src/components/NounInfoRowHolder/index.tsx
 msgid "CN Nouns Auction House"
@@ -333,7 +333,7 @@ msgid "Error"
 msgstr "エラー"
 
 #: src/components/NounInfoRowBirthday/index.tsx
-msgid "Error fetching CN Noun birthday"
+msgid "Error fetching Niji Noun birthday"
 msgstr "CN Nounの誕生日を取得できませんでした"
 
 #: src/components/NounInfoCard/index.tsx
@@ -366,12 +366,12 @@ msgid "Failed to fetch"
 msgstr "取得できませんでした"
 
 #: src/components/ProfileActivityFeed/index.tsx
-msgid "Failed to fetch CN Noun activity history"
-msgstr "CN Noun の活動履歴の取得に失敗しました。"
+msgid "Failed to fetch Niji Noun activity history"
+msgstr "Niji Noun の活動履歴の取得に失敗しました。"
 
 #: src/components/Holder/index.tsx
 #: src/components/NounInfoRowHolder/index.tsx
-msgid "Failed to fetch CN Noun info"
+msgid "Failed to fetch Niji Noun info"
 msgstr "CN Nounに関する情報の取得に失敗しました"
 
 #: src/components/VoteCard/index.tsx
@@ -676,7 +676,7 @@ msgid "There was an error voting for your account."
 msgstr "アカウントの投票中にエラーが発生しました。"
 
 #: src/components/ProfileActivityFeed/index.tsx
-msgid "This CN Noun has no activity, since it was just created. Check back soon!"
+msgid "This Niji Noun has no activity, since it was just created. Check back soon!"
 msgstr "このCN Nounは作成されたばかりで、動きがありません。また後ほどご確認ください！"
 
 #: src/components/ProposalContent/index.tsx
@@ -784,7 +784,7 @@ msgid "Voted for"
 msgstr "賛成に投票"
 
 #: src/components/DelegateHoverCard/index.tsx
-msgid "Voted with<0>{numVotesForProp}</0>CN Noun"
+msgid "Voted with<0>{numVotesForProp}</0>Niji Noun"
 msgstr "<0>{numVotesForProp}</0>のCN Nounで投票"
 
 #: src/components/DelegateHoverCard/index.tsx
@@ -792,7 +792,7 @@ msgid "Voted with<0>{numVotesForProp}</0>CN Nouns"
 msgstr "<0>{numVotesForProp}</0>のCN Nounで投票"
 
 #: src/components/VoteModal/index.tsx
-msgid "Voting with <0>{0}</0> CN Noun"
+msgid "Voting with <0>{0}</0> Niji Noun"
 msgstr "<0>{0}</0>票を投票"
 
 #: src/components/VoteModal/index.tsx
