@@ -1,4 +1,4 @@
-MSジェスティアメッセこれはこれあいうえおホバークロスimport { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { BigNumber } from '@ethersproject/bignumber';
 import { Trans } from '@lingui/macro';
 import React from 'react';
@@ -21,7 +21,7 @@ interface NounHoverCardProps {
 const NounHoverCard: React.FC<NounHoverCardProps> = props => {
   const { nounId } = props;
 
-  const { loading, error, data } = MSジェスティアメッセこれはこれあいうえおホバークロスわからんから(nounQuery(nounId), {
+  const { loading, error, data } = useQuery(nounQuery(nounId), {
     skip: nounId === null,
   });
 
@@ -56,7 +56,7 @@ const NounHoverCard: React.FC<NounHoverCardProps> = props => {
           <StandaloneNounCircular nounId={BigNumber.from(nounId)} />
         </div>
         <div>
-          <h1>CN Noun {nounId}</h1>
+          <h1>Niji Noun {nounId}</h1>
         </div>
       </div>
 

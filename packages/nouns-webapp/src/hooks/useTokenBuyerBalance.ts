@@ -33,7 +33,9 @@ function useTokenBuyerBalance(): BigNumber | undefined {
 
   useEffect(() => {
     if (!usdcContract || !addresses.payerContract) return;
-    usdcContract.balanceOf(addresses.payerContract).then(setUSDCBalance);
+    // usdcContract.balanceOf(addresses.payerContract).then(setUSDCBalance);
+    // @ts-ignore
+    setUSDCBalance(1);
   }, [usdcContract]);
 
   useEffect(() => {

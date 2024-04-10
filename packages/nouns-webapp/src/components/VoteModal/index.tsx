@@ -1,13 +1,19 @@
-import { Button, FloatingLabel, FormControl, Spinner } from 'react-bootstrap';
-import classes from './VoteModal.module.css';
-import { useCastRefundableVote, useCastRefundableVoteWithReason, useCastVote, useCastVoteWithReason, Vote } from '../../wrappers/nounsDao';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { TransactionStatus, useEthers } from '@usedapp/core';
-import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
-import clsx from 'clsx';
-import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
+import { Trans } from '@lingui/macro';
+import { TransactionStatus, useEthers } from '@usedapp/core';
+import clsx from 'clsx';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { Button, FloatingLabel, FormControl, Spinner } from 'react-bootstrap';
+import {
+  useCastRefundableVote,
+  useCastRefundableVoteWithReason,
+  useCastVote,
+  useCastVoteWithReason,
+  Vote,
+} from '../../wrappers/nounsDao';
+import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 import SolidColorBackgroundModal from '../SolidColorBackgroundModal';
+import classes from './VoteModal.module.css';
 
 interface VoteModalProps {
   show: boolean;
@@ -23,7 +29,8 @@ const VoteModal = ({ show, onHide, proposalId, availableVotes }: VoteModalProps)
   const { castVote, castVoteState } = useCastVote();
   const { castVoteWithReason, castVoteWithReasonState } = useCastVoteWithReason();
   const { castRefundableVote, castRefundableVoteState } = useCastRefundableVote();
-  const { castRefundableVoteWithReason, castRefundableVoteWithReasonState } = useCastRefundableVoteWithReason();
+  const { castRefundableVoteWithReason, castRefundableVoteWithReasonState } =
+    useCastRefundableVoteWithReason();
   const [vote, setVote] = useState<Vote>();
   const [voteReason, setVoteReason] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -120,7 +127,8 @@ const VoteModal = ({ show, onHide, proposalId, availableVotes }: VoteModalProps)
       <div className={classes.voteModalSubtitle}>
         {availableVotes === 1 ? (
           <Trans>
-            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> CN Noun
+            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> Niji
+            Noun
           </Trans>
         ) : (
           <Trans>
@@ -233,14 +241,10 @@ const VoteModal = ({ show, onHide, proposalId, availableVotes }: VoteModalProps)
             {isLoading ? <Spinner animation="border" /> : <Trans>Submit Vote</Trans>}
           </Button>
 
-          <div
-          className={classes.gasFreeVotingWrapper}
-          >
-            <span
-            className={classes.gasFreeVotingCopy}
-            >
+          <div className={classes.gasFreeVotingWrapper}>
+            <span className={classes.gasFreeVotingCopy}>
               <Trans>
-              Gas spent on voting will be refunded to you. Gnosis Safe is not yet supported.
+                Gas spent on voting will be refunded to you. Gnosis Safe is not yet supported.
               </Trans>
             </span>
           </div>

@@ -15,6 +15,7 @@ const proxyRegistries: Record<number, string> = {
 };
 const wethContracts: Record<number, string> = {
   [ChainId.AstarZkEVM]: '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38.',
+  [ChainId.Sepolia]: '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38.',
   [ChainId.ZKyoto]: '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
 };
 

@@ -1,9 +1,22 @@
 import { keccak256 as solidityKeccak256 } from '@ethersproject/solidity';
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
 import { NounSeed, NounData } from './types';
-import { images, bgcolors } from './image-data.json';
+// import { images, bgcolors } from './image-data.json';
+import { images, bgcolors } from './image-s3.json';
 
-const { bodies, heads, glasses, skills } = images;
+const {
+  backgroundDecorations,
+  specials,
+  leftHands,
+  backs,
+  ears,
+  chokers,
+  clothes,
+  hairs,
+  headphones,
+  hats,
+  backDecorations,
+} = images;
 
 type ObjectKey = keyof typeof images;
 
@@ -12,12 +25,24 @@ type ObjectKey = keyof typeof images;
  * @param seed The Noun seed
  */
 export const getNounData = (seed: NounSeed): NounData => {
+  console.log(`getNounData backgroundDecorations: ${backgroundDecorations}`);
+  console.log(`getNounData images: ${JSON.stringify(images)}`);
+  console.log(`getNounData seed: ${JSON.stringify(seed)}`);
+  console.log(`getNounData: ${backgroundDecorations[seed.backgroundDecoration],
+      specials[seed.special]}`)
   return {
     parts: [
-      bodies[seed.body],
-      heads[seed.head],
-      glasses[seed.glasses],
-      skills[seed.skill],
+      backgroundDecorations[seed.backgroundDecoration],
+      specials[seed.special],
+      leftHands[seed.leftHand],
+      backs[seed.back],
+      ears[seed.ear],
+      chokers[seed.choker],
+      clothes[seed.clothe],
+      hairs[seed.hair],
+      headphones[seed.headphone],
+      hats[seed.hat],
+      backDecorations[seed.backDecoration],
     ],
     background: bgcolors[seed.background],
   };
@@ -30,10 +55,17 @@ export const getNounData = (seed: NounSeed): NounData => {
 export const getRandomNounSeed = (): NounSeed => {
   return {
     background: Math.floor(Math.random() * bgcolors.length),
-    body: Math.floor(Math.random() * bodies.length),
-    head: Math.floor(Math.random() * heads.length),
-    glasses: Math.floor(Math.random() * glasses.length),
-    skill: Math.floor(Math.random() * skills.length),
+    backgroundDecoration: Math.floor(Math.random() * backgroundDecorations.length),
+    special: Math.floor(Math.random() * specials.length),
+    leftHand: Math.floor(Math.random() * leftHands.length),
+    back: Math.floor(Math.random() * ears.length),
+    ear: Math.floor(Math.random() * backs.length),
+    choker: Math.floor(Math.random() * chokers.length),
+    clothe: Math.floor(Math.random() * clothes.length),
+    hair: Math.floor(Math.random() * hairs.length),
+    headphone: Math.floor(Math.random() * headphones.length),
+    hat: Math.floor(Math.random() * hats.length),
+    backDecoration: Math.floor(Math.random() * backDecorations.length),
   };
 };
 
@@ -78,10 +110,17 @@ export const getNounSeedFromBlockHash = (nounId: BigNumberish, blockHash: string
   const pseudorandomness = solidityKeccak256(['bytes32', 'uint256'], [blockHash, nounId]);
   return {
     background: getPseudorandomPart(pseudorandomness, bgcolors.length, 0),
-    body: getPseudorandomPart(pseudorandomness, bodies.length, 48),
-    head: getPseudorandomPart(pseudorandomness, heads.length, 96),
-    glasses: getPseudorandomPart(pseudorandomness, glasses.length, 144),
-    skill: getPseudorandomPart(pseudorandomness, skills.length, 192),
+    backgroundDecoration: getPseudorandomPart(pseudorandomness, backDecorations.length, 48),
+    special: getPseudorandomPart(pseudorandomness, specials.length, 96),
+    leftHand: getPseudorandomPart(pseudorandomness, leftHands.length, 144),
+    back: getPseudorandomPart(pseudorandomness, backs.length, 192),
+    ear: getPseudorandomPart(pseudorandomness, ears.length, 240),
+    choker: getPseudorandomPart(pseudorandomness, chokers.length, 288),
+    clothe: getPseudorandomPart(pseudorandomness, clothes.length, 336),
+    hair: getPseudorandomPart(pseudorandomness, hairs.length, 384),
+    headphone: getPseudorandomPart(pseudorandomness, headphones.length, 432),
+    hat: getPseudorandomPart(pseudorandomness, hats.length, 480),
+    backDecoration: getPseudorandomPart(pseudorandomness, backDecorations.length, 528),
   };
 };
 

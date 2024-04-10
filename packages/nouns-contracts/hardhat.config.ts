@@ -55,29 +55,8 @@ const config: HardhatUserConfig = {
       url: `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       ...userConfig,
     },
-    z_katana: {
-      url: 'https://rpc.startale.com/zkatana',
-      // url: 'https://astar-zkatana-rpc.dwellir.com',
-      ...userConfig,
-    },
     z_kyoto: {
       url: 'https://rpc.startale.com/zkyoto',
-      ...userConfig,
-    },
-    arbitrum_spolia: {
-      url: 'https://public.stackup.sh/api/v1/node/arbitrum-sepolia',
-      ...userConfig,
-    },
-    optimism_spolia: {
-      url: 'https://sepolia.optimism.io',
-      ...userConfig,
-    },
-    base_spolia: {
-      url: 'https://sepolia.base.org',
-      ...userConfig,
-    },
-    polygon_zkevm_testnet: {
-      url: 'https://rpc.public.zkevm-test.net',
       ...userConfig,
     },
     hardhat: {
@@ -86,31 +65,15 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      mainnet: process.env.ETHERSCAN_API_KEY!,
+      z_kyoto: process.env.ETHERSCAN_API_KEY || '',
     },
     customChains: [
       {
-        network: 'z_katana',
-        chainId: 1261120,
-        urls: {
-          apiURL: 'https://zkatana.explorer.startale.com/api',
-          browserURL: 'https://zkatana.explorer.startale.com',
-        },
-      },
-      {
-        network: 'zKyoto',
+        network: 'z_kyoto',
         chainId: 6038361,
         urls: {
-          apiURL: 'https://astar-zkevm.explorer.startale.com/api',
-          browserURL: 'https://astar-zkevm.explorer.startale.com/',
-        },
-      },
-      {
-        network: 'baseSepolia',
-        chainId: 84532,
-        urls: {
-          apiURL: 'https://base-sepolia.blockscout.com/api',
-          browserURL: 'https://base-sepolia.blockscout.com',
+          apiURL: 'https://zkyoto.explorer.startale.com/api',
+          browserURL: 'https://zkyoto.explorer.startale.com/',
         },
       },
     ],

@@ -58,7 +58,7 @@ library NFTDescriptorV2 {
                 Base64.encode(
                     bytes(
                         abi.encodePacked(
-                            '{"name":"', params.name, '", "description":"', params.description, '", "image": "', params.parts[0].image, params.parts[1].image, params.parts[2].image, params.parts[3].image, params.parts[4].image, params.parts[5].image, params.parts[6].image, params.parts[7].image, params.parts[8].image, params.parts[9].image, params.parts[10].image, '.png"}'
+                            '{"name":"', params.name, '", "description":"', params.description, '", "image": "https://res.cloudinary.com/dplp5wtzk/niji/img', params.parts[0].image, params.parts[1].image, params.parts[2].image, params.parts[3].image, params.parts[4].image, params.parts[5].image, params.parts[6].image, params.parts[7].image, params.parts[8].image, params.parts[9].image, params.parts[10].image, '.png"}'
                         )
                     )
                 )

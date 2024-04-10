@@ -14,10 +14,17 @@ interface NounToken {
 
 export interface INounSeed {
   background: number;
-  body: number;
-  glasses: number;
-  head: number;
-  skill: number;
+  backgroundDecoration: number;
+  special: number;
+  leftHand: number;
+  back: number;
+  ear: number;
+  choker: number;
+  clothe: number;
+  hair: number;
+  headphone: number;
+  hat: number;
+  backDecoration: number;
 }
 
 export enum NounsTokenContractFunction {
@@ -28,7 +35,7 @@ const abi = new utils.Interface(NounsTokenABI);
 const seedCacheKey = cacheKey(cache.seed, CHAIN_ID, config.addresses.nounsToken);
 
 const isSeedValid = (seed: Record<string, any> | undefined) => {
-  const expectedKeys = ['background', 'body', 'head', 'glasses', 'skill'];
+  const expectedKeys = ['background', 'backgroundDecoration', 'special', 'leftHand', 'back', 'ear', 'choker', 'clothe', 'hair', 'headphone', 'hat', 'backDecoration'];
   const hasExpectedKeys = expectedKeys.every(key => (seed || {}).hasOwnProperty(key));
   const hasValidValues = Object.values(seed || {}).some(v => v !== 0);
   return hasExpectedKeys && hasValidValues;
@@ -57,10 +64,17 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
   return seeds.reduce<Record<string, INounSeed>>((acc, seed) => {
     acc[seed.id] = {
       background: Number(seed.background),
-      body: Number(seed.body),
-      head: Number(seed.head),
-      glasses: Number(seed.glasses),
-      skill: Number(seed.skill),
+      backgroundDecoration: Number(seed.backgroundDecoration),
+      special: Number(seed.special),
+      leftHand: Number(seed.leftHand),
+      back: Number(seed.back),
+      ear: Number(seed.ear),
+      choker: Number(seed.choker),
+      clothe: Number(seed.clothe),
+      hair: Number(seed.hair),
+      headphone: Number(seed.headphone),
+      hat: Number(seed.hat),
+      backDecoration: Number(seed.backDecoration),
     };
     return acc;
   }, {});
@@ -85,6 +99,7 @@ const useNounSeeds = () => {
 export const useNounSeed = (nounId: EthersBN): INounSeed => {
   const seeds = useNounSeeds();
   const seed = seeds?.[nounId.toString()];
+  console.log(`config.addresses.nounsToken: ${config.addresses.nounsToken}`);
   // prettier-ignore
   const request = seed ? false : {
     abi,
@@ -100,10 +115,17 @@ export const useNounSeed = (nounId: EthersBN): INounSeed => {
         ...JSON.parse(seedCache),
         [nounId.toString()]: {
           background: response.background,
-          body: response.body,
-          glasses: response.glasses,
-          head: response.head,
-          skill: response.skill,
+          backgroundDecoration: response.backgroundDecoration,
+          special: response.special,
+          leftHand: response.leftHand,
+          back: response.back,
+          ear: response.ear,
+          choker: response.choker,
+          clothe: response.clothe,
+          hair: response.hair,
+          headphone: response.headphone,
+          hat: response.hat,
+          backDecoration: response.backDecoration,
         },
       });
       localStorage.setItem(seedCacheKey, updatedSeedCache);
@@ -163,6 +185,7 @@ export const useDelegateVotes = () => {
 };
 
 export const useNounTokenBalance = (address: string): number | undefined => {
+  console.log('start useNounTokenBalance!');
   const [tokenBalance] =
     useContractCall<[EthersBN]>({
       abi,
@@ -175,6 +198,8 @@ export const useNounTokenBalance = (address: string): number | undefined => {
 
 export const useUserNounTokenBalance = (): number | undefined => {
   const { account } = useEthers();
+
+  console.log(`start useUserNounTokenBalance!: ${account}`);
 
   const [tokenBalance] =
     useContractCall<[EthersBN]>({
