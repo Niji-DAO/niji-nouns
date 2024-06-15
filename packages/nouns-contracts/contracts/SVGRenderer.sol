@@ -52,32 +52,32 @@ contract SVGRenderer is ISVGRenderer {
     function generateSVG(SVGParams calldata params) external pure override returns (string memory svg) {
         if (bytes(params.background).length != 0) {
             // prettier-ignore
-            // return string(
-            //     abi.encodePacked(
-            //         _SVG_START_TAG,
-            //         '<rect width="100%" height="100%" fill="#', params.background, '" />',
-            //         _generateSVGRects(params),
-            //         _SVG_END_TAG
-            //     )
-            // );
             return string(
                 abi.encodePacked(
-                    "https://",
-                    params.background,
-                    params.parts[0].image
-                    // params.parts[1].image,
-                    // params.parts[2].image,
-                    // params.parts[3].image,
-                    // params.parts[4].image,
-                    // params.parts[5].image,
-                    // params.parts[6].image,
-                    // params.parts[7].image,
-                    // params.parts[8].image,
-                    // params.parts[9].image,
-                    // params.parts[10].image,
-                    // params.parts[11].image
+                    _SVG_START_TAG,
+                    '<rect width="100%" height="100%" fill="#', params.background, '" />',
+                    _generateSVGRects(params),
+                    _SVG_END_TAG
                 )
             );
+            // return string(
+            //     abi.encodePacked(
+            //         "https://",
+            //         params.background,
+            //         params.parts[0].image
+            //         // params.parts[1].image,
+            //         // params.parts[2].image,
+            //         // params.parts[3].image,
+            //         // params.parts[4].image,
+            //         // params.parts[5].image,
+            //         // params.parts[6].image,
+            //         // params.parts[7].image,
+            //         // params.parts[8].image,
+            //         // params.parts[9].image,
+            //         // params.parts[10].image,
+            //         // params.parts[11].image
+            //     )
+            // );
         }
         return string(abi.encodePacked(_SVG_START_TAG, _generateSVGRects(params), _SVG_END_TAG));
     }
@@ -108,18 +108,18 @@ contract SVGRenderer is ISVGRenderer {
         pure
         returns (string memory svg)
     {
-        // string[33] memory lookup = [
-        //     '0', '10', '20', '30', '40', '50', '60', '70',
-        //     '80', '90', '100', '110', '120', '130', '140', '150',
-        //     '160', '170', '180', '190', '200', '210', '220', '230',
-        //     '240', '250', '260', '270', '280', '290', '300', '310',
-        //     '320'
-        // ];
+        string[33] memory lookup = [
+            '0', '10', '20', '30', '40', '50', '60', '70',
+            '80', '90', '100', '110', '120', '130', '140', '150',
+            '160', '170', '180', '190', '200', '210', '220', '230',
+            '240', '250', '260', '270', '280', '290', '300', '310',
+            '320'
+        ];
 
-        string[49] memory lookup;
-        for (uint i = 0; i < 48; i++) {
-            lookup[i] = Strings.toString(i * 7); // 320 / 48 = 6.6667, ここでは約7ピクセルごとに設定
-        }
+        // string[49] memory lookup;
+        // for (uint i = 0; i < 48; i++) {
+        //     lookup[i] = Strings.toString(i * 7); // 320 / 48 = 6.6667, ここでは約7ピクセルごとに設定
+        // }
 
         // string[129] memory lookup;
         // for (uint i = 0; i < 128; i++) {
@@ -226,8 +226,8 @@ contract SVGRenderer is ISVGRenderer {
 
         uint256 cursor;
         Draw[] memory draws = new Draw[]((image.length - 5) / 2);
-        // for (uint8 i = 5; i < image.length; i += 2) {
-        for (uint256 i = 5; i < image.length - 1; i += 2) {
+        for (uint8 i = 5; i < image.length; i += 2) {
+        // for (uint256 i = 5; i < image.length - 1; i += 2) {
             draws[cursor] = Draw({ length: uint8(image[i]), colorIndex: uint8(image[i + 1]) });
             cursor++;
         }

@@ -30,10 +30,10 @@ import {
 import { Block } from '@ethersproject/abstract-provider';
 import { BigNumber } from 'ethers';
 import { deflateRawSync } from 'zlib';
-// import ImageData from '../files/image-data-32.json';
+import ImageData from '../files/image-data-32.json';
 // import ImageData from '../files/image-data-48.json';
 // import ImageData from '../files/image-data-64.json';
-import ImageData from '../files/image-s3.json';
+// import ImageData from '../files/image-s3.json';
 import { MAX_QUORUM_VOTES_BPS, MIN_QUORUM_VOTES_BPS } from './constants';
 import { DynamicQuorumParams } from './types';
 
@@ -187,63 +187,43 @@ export const populateDescriptorV2 = async (nounsDescriptor: NounsDescriptorV2): 
 
   console.log(`🚀 backgroundDecorationData: ${backgroundDecorationData}`);
 
-  const specialData: string[] = specials.map(
-    special => special.data,
-  );
+  const specialData: string[] = specials.map(special => special.data);
 
   console.log(`🚀 specialData: ${specialData}`);
 
-  const leftHandData: string[] = leftHands.map(
-    leftHand  => leftHand.data,
-  );
+  const leftHandData: string[] = leftHands.map(leftHand => leftHand.data);
 
   console.log(`🚀 leftHandData: ${leftHandData}`);
 
-  const backData: string[] = backs.map(
-    back => back.data,
-    );
+  const backData: string[] = backs.map(back => back.data);
 
   console.log(`🚀 backData: ${backData}`);
 
-  const earData: string[] = ears.map(
-    ear  => ear.data,
-  );
+  const earData: string[] = ears.map(ear => ear.data);
 
   console.log(`🚀 earData: ${earData}`);
 
-const chokerData: string[] = chokers.map(
-    choker => choker.data,
-  );
+  const chokerData: string[] = chokers.map(choker => choker.data);
 
   console.log(`🚀 chokerData: ${chokerData}`);
 
-const clotheData: string[] = clothes.map(
-    clothe => clothe.data,
-  );
+  const clotheData: string[] = clothes.map(clothe => clothe.data);
 
   console.log(`🚀 clotheData: ${clotheData}`);
 
-const hairData: string[] = hairs.map(
-    hair => hair.data,
-  );
+  const hairData: string[] = hairs.map(hair => hair.data);
 
   console.log(`🚀 hairData: ${hairData}`);
 
-const headphoneData: string[] = headphones.map(
-    headphone => headphone.data,
-  );
+  const headphoneData: string[] = headphones.map(headphone => headphone.data);
 
   console.log(`🚀 headphoneData: ${headphoneData}`);
 
-const hatData: string[] = hats.map(
-    hat => hat.data,
-  );
+  const hatData: string[] = hats.map(hat => hat.data);
 
   console.log(`🚀 hatData: ${hatData}`);
 
-const backDecorationData: string[] = backDecorations.map(
-    backDecoration => backDecoration.data,
-  );
+  const backDecorationData: string[] = backDecorations.map(backDecoration => backDecoration.data);
 
   console.log(`🚀 backDecorationData: ${backDecorationData}`);
 
@@ -624,7 +604,7 @@ function dataToDescriptorInput(data: string[]): {
   itemCount: number;
 } {
   console.log('start dataToDescriptorInput');
-  console.log(`data: ${data}`)
+  console.log(`data: ${data}`);
   const dataAsBytes32 = data.map(item => ethers.utils.formatBytes32String(item));
   console.log(`dataAsBytes32: ${dataAsBytes32}`);
   const abiEncoded = ethers.utils.defaultAbiCoder.encode(['bytes32[]'], [dataAsBytes32]);
