@@ -32,6 +32,7 @@ import { NFTDescriptorV2 } from './libs/NFTDescriptorV2.sol';
 import { ISVGRenderer } from './interfaces/ISVGRenderer.sol';
 import { INounsArt } from './interfaces/INounsArt.sol';
 import { IInflator } from './interfaces/IInflator.sol';
+import 'hardhat/console.sol';
 
 contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     using Strings for uint256;
@@ -807,6 +808,7 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      */
     function tokenURI(uint256 tokenId, INounsSeeder.Seed memory seed) external view override returns (string memory) {
         if (isDataURIEnabled) {
+            console.log("tokenURI");
             return dataURI(tokenId, seed);
         }
         return string(abi.encodePacked(baseURI, tokenId.toString()));
@@ -820,6 +822,8 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         string memory name = string(abi.encodePacked('NijiNoun ', nounId));
         string memory description = string(abi.encodePacked('NijiNoun ', nounId, ' is a member of the Niji DAO'));
 
+        console.log("dataURI");
+
         return genericDataURI(name, description, seed);
     }
 
@@ -831,12 +835,14 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         string memory description,
         INounsSeeder.Seed memory seed
     ) public view override returns (string memory) {
+        console.log("genericDataURI");
         NFTDescriptorV2.TokenURIParams memory params = NFTDescriptorV2.TokenURIParams({
             name: name,
             description: description,
             parts: getPartsForSeed(seed),
             background: art.backgrounds(seed.background)
         });
+        console.log("call NFTDescriptorV2.constructTokenURI");
         return NFTDescriptorV2.constructTokenURI(renderer, params);
     }
 
@@ -856,62 +862,74 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      */
     function getPartsForSeed(INounsSeeder.Seed memory seed) public view returns (ISVGRenderer.Part[] memory) {
         ISVGRenderer.Part[] memory parts = new ISVGRenderer.Part[](11);
+        console.log("start getPartsForSeed");
         {
-            // bytes memory backgroundDecoration = art.backgroundDecorations(seed.backgroundDecoration);
-            // parts[0] = ISVGRenderer.Part({ image: backgroundDecoration, palette: _getPalette(backgroundDecoration) });
-            parts[0] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backgroundDecorations', seed.backgroundDecoration)), palette: "" });
+            bytes memory backgroundDecoration = art.backgroundDecorations(seed.backgroundDecoration);
+            parts[0] = ISVGRenderer.Part({ image: backgroundDecoration, palette: _getPalette(backgroundDecoration) });
+            // parts[0] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backgroundDecorations', seed.backgroundDecoration)), palette: "" });
         }
+        console.log("backgroundDecoration");
         {
-            // bytes memory special = art.specials(seed.special);
-            // parts[1] = ISVGRenderer.Part({ image: special, palette: _getPalette(special) });
-            parts[1] = ISVGRenderer.Part({ image: bytes(art.getImagePart('specials', seed.special)), palette: "" });
+            bytes memory special = art.specials(seed.special);
+            parts[1] = ISVGRenderer.Part({ image: special, palette: _getPalette(special) });
+            // parts[1] = ISVGRenderer.Part({ image: bytes(art.getImagePart('specials', seed.special)), palette: "" });
         }
+        console.log("special");
         {
-            // bytes memory leftHand = art.leftHands(seed.leftHand);
-            // parts[2] = ISVGRenderer.Part({ image: leftHand, palette: _getPalette(leftHand) });
-            parts[2] = ISVGRenderer.Part({ image: bytes(art.getImagePart('leftHands', seed.leftHand)), palette: "" });
+            bytes memory leftHand = art.leftHands(seed.leftHand);
+            parts[2] = ISVGRenderer.Part({ image: leftHand, palette: _getPalette(leftHand) });
+            // parts[2] = ISVGRenderer.Part({ image: bytes(art.getImagePart('leftHands', seed.leftHand)), palette: "" });
         }
+        console.log("leftHand");
         {
-            // bytes memory back = art.backs(seed.back);
-            // parts[3] = ISVGRenderer.Part({ image: back, palette: _getPalette(back) });
-            parts[3] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backs', seed.back)), palette: "" });
+            bytes memory back = art.backs(seed.back);
+            parts[3] = ISVGRenderer.Part({ image: back, palette: _getPalette(back) });
+            // parts[3] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backs', seed.back)), palette: "" });
         }
+        console.log("back");
         {
-            // bytes memory ear = art.ears(seed.ear);
-            // parts[4] = ISVGRenderer.Part({ image: ear, palette: _getPalette(ear) });
-            parts[4] = ISVGRenderer.Part({ image: bytes(art.getImagePart('ears', seed.ear)), palette: "" });
+            bytes memory ear = art.ears(seed.ear);
+            parts[4] = ISVGRenderer.Part({ image: ear, palette: _getPalette(ear) });
+            // parts[4] = ISVGRenderer.Part({ image: bytes(art.getImagePart('ears', seed.ear)), palette: "" });
         }
+        console.log("ear");
         {
-            // bytes memory choker = art.chokers(seed.choker);
-            // parts[5] = ISVGRenderer.Part({ image: choker, palette: _getPalette(choker) });
-            parts[5] = ISVGRenderer.Part({ image: bytes(art.getImagePart('chokers', seed.choker)), palette: "" });
+            bytes memory choker = art.chokers(seed.choker);
+            parts[5] = ISVGRenderer.Part({ image: choker, palette: _getPalette(choker) });
+            // parts[5] = ISVGRenderer.Part({ image: bytes(art.getImagePart('chokers', seed.choker)), palette: "" });
         }
+        console.log("choker");
         {
-            // bytes memory clothe = art.clothes(seed.clothe);
-            // parts[6] = ISVGRenderer.Part({ image: clothe, palette: _getPalette(clothe) });
-            parts[6] = ISVGRenderer.Part({ image: bytes(art.getImagePart('clothes', seed.clothe)), palette: "" });
+            bytes memory clothe = art.clothes(seed.clothe);
+            parts[6] = ISVGRenderer.Part({ image: clothe, palette: _getPalette(clothe) });
+            // parts[6] = ISVGRenderer.Part({ image: bytes(art.getImagePart('clothes', seed.clothe)), palette: "" });
         }
+        console.log("clothe");
         {
-            // bytes memory hair = art.hairs(seed.hair);
-            // parts[7] = ISVGRenderer.Part({ image: hair, palette: _getPalette(hair) });
-            parts[7] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hairs', seed.hair)), palette: "" });
+            bytes memory hair = art.hairs(seed.hair);
+            parts[7] = ISVGRenderer.Part({ image: hair, palette: _getPalette(hair) });
+            // parts[7] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hairs', seed.hair)), palette: "" });
         }
+        console.log("hair");
         {
-            // bytes memory headphone = art.headphones(seed.headphone);
-            // parts[8] = ISVGRenderer.Part({ image: headphone, palette: _getPalette(headphone) });
-            parts[8] = ISVGRenderer.Part({ image: bytes(art.getImagePart('headphones', seed.headphone)), palette: "" });
+            bytes memory headphone = art.headphones(seed.headphone);
+            parts[8] = ISVGRenderer.Part({ image: headphone, palette: _getPalette(headphone) });
+            // parts[8] = ISVGRenderer.Part({ image: bytes(art.getImagePart('headphones', seed.headphone)), palette: "" });
         }
+        console.log("headphone");
         {
-            // bytes memory hat = art.hats(seed.hat);
-            // parts[9] = ISVGRenderer.Part({ image: hat, palette: _getPalette(hat) });
-            parts[9] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hats', seed.hat)), palette: "" });
+            bytes memory hat = art.hats(seed.hat);
+            parts[9] = ISVGRenderer.Part({ image: hat, palette: _getPalette(hat) });
+            // parts[9] = ISVGRenderer.Part({ image: bytes(art.getImagePart('hats', seed.hat)), palette: "" });
         }
-
+        console.log("hat");
         {
-            // bytes memory backDecoration = art.backDecorations(seed.backDecoration);
-            // parts[10] = ISVGRenderer.Part({ image: backDecoration, palette: _getPalette(backDecoration) });
-            parts[10] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backDecorations', seed.backDecoration)), palette: "" });
+            bytes memory backDecoration = art.backDecorations(seed.backDecoration);
+            parts[10] = ISVGRenderer.Part({ image: backDecoration, palette: _getPalette(backDecoration) });
+            // parts[10] = ISVGRenderer.Part({ image: bytes(art.getImagePart('backDecorations', seed.backDecoration)), palette: "" });
         }
+        console.log("backDecoration");
+        console.log("end getPartsForSeed");
         return parts;
     }
 

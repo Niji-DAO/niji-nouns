@@ -64,19 +64,19 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: {
-      z_kyoto: process.env.ETHERSCAN_API_KEY || '',
-    },
-    customChains: [
-      {
-        network: 'z_kyoto',
-        chainId: 6038361,
-        urls: {
-          apiURL: 'https://zkyoto.explorer.startale.com/api',
-          browserURL: 'https://zkyoto.explorer.startale.com/',
-        },
-      },
-    ],
+    // apiKey: {
+    //   z_kyoto: process.env.ETHERSCAN_API_KEY || '',
+    // },
+    // customChains: [
+    //   {
+    //     network: 'z_kyoto',
+    //     chainId: 6038361,
+    //     urls: {
+    //       apiURL: 'https://zkyoto.explorer.startale.com/api',
+    //       browserURL: 'https://zkyoto.explorer.startale.com/',
+    //     },
+    //   },
+    // ],
   },
   sourcify: {
     enabled: true,
